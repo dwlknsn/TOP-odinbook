@@ -42,6 +42,7 @@ gem "image_processing", "~> 1.2"
 
 gem "devise", "~> 4.9"
 
+gem "css-zero", "~> 0.0.70"
 
 
 
