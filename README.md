@@ -1,24 +1,5 @@
-# README
+https://www.theodinproject.com/lessons/ruby-on-rails-rails-final-project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Data modelling and UI design:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![TOP-odinbook](https://github.com/user-attachments/assets/ccb90176-9d3f-46c3-a128-b86ce90ccc65)
