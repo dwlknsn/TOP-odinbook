@@ -1,0 +1,30 @@
+<h1>Editing <%= @profile.display_name %></h1>
+
+<%= form_with model: @profile, method: :patch do |f| %>
+  <% @profile.errors.each do |error| %>
+    <div>
+      <%= error.full_message %>
+    </div>
+  <% end %>
+  <div>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </div>
+  <div>
+    <%= f.label :display_name %>
+    <%= f.text_field :display_name %>
+  </div>
+  <div>
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+  </div>
+  <div>
+    Current Avatar
+    <%= image_tag(@profile.avatar) %>
+  </div>
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to "Back to profile", profile_path %>

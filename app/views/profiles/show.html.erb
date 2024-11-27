@@ -1,11 +1,15 @@
 <h1>Profiles#show</h1>
 
 <div>
-  Email: <%= @user.email %>
+  Username: @<%= @profile.username %>
 </div>
 <div>
-  Username: @<%= @user.username %>
+  Display Name: <%= @profile.display_name %>
 </div>
 <div>
-  Display Name: <%= @user.display_name %>
+  Avatar: <%= image_tag(avatar_url(@profile), alt: "Avatar for #{@profile.display_name}") %>
+</div>
+
+<div>
+  <%= link_to "Edit Profile", edit_profile_path %>
 </div>

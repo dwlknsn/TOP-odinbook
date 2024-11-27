@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
 
   has_one :profile, dependent: :destroy
-  delegate :username, :display_name, to: :profile
+  delegate :username, :display_name, :avatar, to: :profile
 
   before_create :create_profile
 
