@@ -8,17 +8,19 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   delegate :username, :display_name, :avatar, to: :profile
 
-  before_create :create_profile
+  after_create :create_basic_profile
 
   has_many :authored_posts, class_name: "Post", inverse_of: :author, dependent: :destroy
 
 
   private
 
-  def create_profile
-    build_profile(
-    username: email.split("@").first,
-    display_name: email.split("@").first
+  def create_basic_profile
+    sanitized_email = email.split("@").first.gsub(/\W/, "").downcase
+
+    create_profile!(
+      username: sanitized_email,
+      display_name: sanitized_email
     )
   end
 end
