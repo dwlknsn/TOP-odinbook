@@ -1,4 +1,4 @@
-<%= form_with(model: post) do |form| %>
+<%= form_with(model: post, class: "flex flex-col gap") do |form| %>
   <% if post.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -13,15 +13,31 @@
 
   <div>
     <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.text_field :title, class: "input", autofocus: true, data: { controller: "autoselect" } %>
   </div>
 
   <div>
     <%= form.label :body, style: "display: block" %>
-    <%= form.textarea :body %>
+  </div>
+  <div>
+    <%= form.textarea :body, rows: 5, class: "input"  %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div id="form-actions" class="flex gap">
+    <div>
+      <%= form.submit "Submit", class: "btn btn--primary" %>
+    </div>
+    <% if action_name == :edit %>
+      <div>
+        <%= link_to "Discard Changes", @post, class: "btn btn--secondary" %>
+      </div>
+    <% else %>
+      <div>
+        <%= link_to "Back to posts", posts_path, class: "btn btn--secondary"  %>
+      </div>
+    <% end %>
   </div>
+
 <% end %>

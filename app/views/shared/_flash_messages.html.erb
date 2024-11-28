@@ -1,0 +1,9 @@
+<% flash.each do |key, value| %>
+  <div popover
+        class="flash <%= key %>"
+        style="--flash-position: 5rem;"
+        data-controller="element-removal"
+        role="alert">
+    <%= value %>
+  </div>
+<% end %>

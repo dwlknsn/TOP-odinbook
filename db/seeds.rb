@@ -20,16 +20,7 @@ u.profile.update!(
   display_name: "David Superuser"
 )
 
-
-movies = [
-  Faker::Movies::BackToTheFuture,
-  Faker::Movies::Ghostbusters,
-  Faker::Movies::HitchhikersGuideToTheGalaxy,
-  Faker::Movies::Lebowski,
-  Faker::Movies::PrincessBride
-]
-
-movies.length.times do |n|
+5.times do |n|
   email = Faker::Internet.unique.email
   puts "creating user: #{email}"
 
@@ -43,14 +34,17 @@ movies.length.times do |n|
     username: "user_#{n}",
     display_name: Faker::Name.name
   )
+end
 
-  # Create 3 posts for each user
-  m = movies.shift
+def create_posts(user)
   3.times do
-    quote = m.quote
-    u.authored_posts.create!(
-      title: quote.truncate_words(5),
-      body: quote,
+    user.authored_posts.create!(
+      title: Faker::Lorem.sentence(word_count: 5),
+      body: Faker::Lorem.paragraphs(number: 3).join("\n\n"),
     )
   end
+end
+
+User.all.each do |user|
+  create_posts(user)
 end

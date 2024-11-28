@@ -1,8 +1,8 @@
 :root {
   /* Abstractions */
-  --color-bg: white;
-  --color-text: black;
-  --color-text-reversed: white;
+  --color-bg: #dee2e6;
+  --color-text: #343a40;
+  --color-text-reversed: #dee2e6;
   --color-text-subtle: var(--zinc-500);
   --color-link: var(--blue-700);
   --color-border-light: var(--zinc-100);
@@ -26,9 +26,9 @@
 
   @media (prefers-color-scheme: dark) {
     /* Abstractions */
-    --color-bg: black;
-    --color-text: white;
-    --color-text-reversed: black;
+    --color-bg: #343a40;
+    --color-text: #dee2e6;
+    --color-text-reversed: #343a40;
     --color-text-subtle: var(--zinc-400);
     --color-link: var(--sky-400);
     --color-border-light: var(--zinc-800);
