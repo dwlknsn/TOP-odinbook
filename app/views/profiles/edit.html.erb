@@ -20,7 +20,7 @@
   </div>
   <div>
     Current Avatar
-    <%= image_tag(@profile.avatar) %>
+    <%= image_tag(avatar_url(@profile.user), alt: "Avatar for #{@profile.display_name}") %>
   </div>
   <div>
     <%= f.submit %>

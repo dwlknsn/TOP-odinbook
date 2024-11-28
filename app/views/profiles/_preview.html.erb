@@ -1,0 +1,40 @@
+<div id="<%= dom_id profile %>" class="card prose bg-main gap profile-card">
+
+  <div class="profile-card-image">
+    <%= image_tag(avatar_url(profile.user), alt: "Avatar for #{profile.display_name}") %>
+  </div>
+
+  <div class="flex flex-col gap profile-card-info">
+    <div class="card">
+      <%= profile.display_name %>
+    </div>
+    <div class="card">
+      @<%= profile.username %>
+    </div>
+  </div>
+
+  <div class="card flex flex-col gap profile-card-actions">
+    <% if action_name != "show" %>
+      <div class="flex">
+        <%= link_to "Go to profile", user_path(profile.user), class: "btn btn--secondary grow" %>
+      </div>
+    <% end %>
+
+    <% if profile.user.followers.include?(current_user) %>
+      <div class="flex">
+        <%= link_to "Unfollow", user_unfollow_path(profile.user), method: :delete, data: { turbo_method: :delete }, class: "btn btn--negative grow" %>
+      </div>
+    <% else %>
+      <% if current_user != profile.user %>
+        <div class="flex">
+          <%= link_to "Follow", user_follow_path(profile.user), data: { turbo_method: :post }, class: "btn btn--positive grow" %>
+        </div>
+      <% else %>
+        <div class="flex">
+          <%= link_to "Edit Profile", edit_profile_path(profile), class: "btn btn--positive grow" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

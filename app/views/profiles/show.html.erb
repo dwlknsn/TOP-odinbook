@@ -1,15 +1,1 @@
-<h1>Profiles#show</h1>
-
-<div>
-  Username: @<%= @profile.username %>
-</div>
-<div>
-  Display Name: <%= @profile.display_name %>
-</div>
-<div>
-  Avatar: <%= image_tag(avatar_url(@profile), alt: "Avatar for #{@profile.display_name}") %>
-</div>
-
-<div>
-  <%= link_to "Edit Profile", edit_profile_path %>
-</div>
+<%= render "profiles/preview", profile: @profile %>

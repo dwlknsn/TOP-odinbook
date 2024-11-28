@@ -9,7 +9,7 @@ module ProfilesHelper
 
   private
 
-  def gravatar_for(user, options = { size: 50 })
+  def gravatar_for(user, options = { size: 100 })
     # docs:
     # https://docs.gravatar.com/api/avatars/ruby/
     # https://docs.gravatar.com/api/avatars/images/

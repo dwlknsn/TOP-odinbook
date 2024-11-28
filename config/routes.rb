@@ -6,7 +6,15 @@ Rails.application.routes.draw do
   resource :profile
   resolve("Profile") { [ :profile ] }
 
-  resources :users, only: [ :index ]
+  resources :users, only: [ :index, :show ] do
+    post :follow, to: "followings#create"
+    delete :unfollow, to: "followings#destroy", as: "unfollow"
+    patch :accept, to: "followings#accept"
+    patch :decline, to: "followings#decline"
+    patch :block, to: "followings#block"
+  end
+
+
   root "users#index"
 
   devise_for :users
