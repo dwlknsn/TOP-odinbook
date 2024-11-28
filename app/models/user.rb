@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   has_many :authored_posts, class_name: "Post", inverse_of: :author, dependent: :destroy
 
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, class_name: "Post", source: :likeable, source_type: "Post"
 
   private
 

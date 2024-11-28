@@ -1,4 +1,4 @@
-<div id="<%= dom_id post %>" class="card prose">
+<div id="<%= dom_id post %>" class="card prose bg-main">
   <h3 class="mb">
     <%= post.title %>
   </h3>
@@ -13,5 +13,20 @@
   <div>
     <%= post.published_at %>
   </div>
+  <% if post.author != current_user %>
+    <div id="actions">
+
+      <% if @like.present? %>
+        <%= form_with url: post_like_path(post, @like), method: :delete do |f| %>
+          <%= f.submit "Remove Like", class: "btn btn--primary" %>
+        <% end %>
+      <% else %>
+        <%= form_with url: post_likes_path(post), method: :post do |f| %>
+          <%= f.submit "Like", class: "btn btn--primary" %>
+        <% end %>
+      <% end %>
+
+    </div>
+  <% end %>
 
 </div>

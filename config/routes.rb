@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :posts
+  resources :posts do
+    resources :likes, only: [ :create, :destroy ]
+  end
 
   resource :profile
   resolve("Profile") { [ :profile ] }
@@ -8,6 +10,8 @@ Rails.application.routes.draw do
   root "users#index"
 
   devise_for :users
+
+
 
 
 

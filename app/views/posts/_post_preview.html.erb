@@ -1,4 +1,4 @@
-<div id="<%= dom_id post %>" class="card prose">
+<div id="<%= dom_id post %>" class="card prose bg-main">
   <h3 class="mb">
     <%= post.title %>
   </h3>
@@ -10,7 +10,7 @@
   <div class="text-end">
     <%= post.author.display_name %> (@<%= post.author.username %> )
   </div>
-  <div>
+  <div class="mb-4 border-dark">
     <%= post.published_at %>
   </div>
   <div>

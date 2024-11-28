@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :author, class_name: "User", foreign_key: :author_id, inverse_of: :authored_posts
+  has_many :likes, as: :likeable, dependent: :destroy
 
   enum :status, {
     draft: 0,
