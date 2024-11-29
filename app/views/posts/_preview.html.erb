@@ -1,17 +1,24 @@
-<div id="<%= dom_id post %>" class="card prose bg-main">
-  <h3 class="mb">
-    <%= post.title %>
-  </h3>
-  <div>
-    <%= post.body %>
+<div id="<%= dom_id post %>" class="card prose bg-main flex">
+  <div class="flex flex-col gap">
+    <div class="avatar border p-2 bg-shade",  style="--avatar-size: 100px;">
+      <%= image_tag(avatar_url_for(post.author), alt: "Avatar", class: "avatar rounded-full object-cover") %>
+    </div>
+    <div class="text-xs text-center text-subtle">
+      <%= time_ago_in_words(post.created_at) %> ago
+    </div>
   </div>
-  <div class="text-end">
-    <%= post.author.display_name %> (@<%= post.author.username %> )
-  </div>
-  <div class="mb-4 border-dark">
-    <%= post.published_at %>
-  </div>
-  <div>
-    <%= link_to "Show this post", post %>
+  <div class="flex flex-col gap mis-8 pis-8 border-is border-dark">
+    <h3 class="mb">
+      <%= post.title %>
+    </h3>
+    <div>
+      <%= post.body.truncate_words(20) %>
+    </div>
+    <div class="text-end text-subtle text-sm">
+      <em>- <%= post.author.display_name %> (@<%= post.author.username %> )</em>
+    </div>
+    <div>
+      <%= link_to "Show full post", post %>
+    </div>
   </div>
 </div>

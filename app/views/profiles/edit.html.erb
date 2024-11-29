@@ -38,7 +38,7 @@
         <% end %>
 
         <div class="avatar" style="--avatar-size: 100px;">
-          <%= image_tag avatar_url(@profile.user), size: 100, alt: "Avatar", data: { upload_preview_target: "image" } %>
+          <%= image_tag avatar_url_for(@profile.user), size: 100, alt: "Avatar", data: { upload_preview_target: "image" } %>
         </div>
 
         <label class="btn btn--icon btn--negative" data-action="click->upload-preview#clear">

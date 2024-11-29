@@ -3,7 +3,8 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.includes([ :likes, author: :profile ]).order(created_at: :desc)
+    @my_posts = Post.includes([ :likes, author: :profile ]).followed_by(current_user).order(created_at: :desc)
+    @discoverable_posts = Post.includes([ :likes, author: :profile ]).discoverable_by(current_user).order(created_at: :desc)
   end
 
   # GET /posts/1 or /posts/1.json

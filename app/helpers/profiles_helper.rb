@@ -1,5 +1,5 @@
 module ProfilesHelper
-  def avatar_url(user)
+  def avatar_url_for(user)
     if user.avatar.present?
       user.avatar
     else

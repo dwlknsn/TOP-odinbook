@@ -1,7 +1,7 @@
 <div id="<%= dom_id profile %>" class="flex gap card bg-main">
 
   <div class="border p-2 bg-shade rounded-full avatar",  style="--avatar-size: 100px;">
-    <%= image_tag(avatar_url(profile.user), alt: "Avatar for #{profile.display_name}", class: "avatar rounded-full object-cover") %>
+    <%= image_tag(avatar_url_for(profile.user), alt: "Avatar for #{profile.display_name}", class: "avatar rounded-full object-cover") %>
   </div>
 
   <div class="flex flex-col gap grow pi-4">

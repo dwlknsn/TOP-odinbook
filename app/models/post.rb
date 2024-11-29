@@ -11,4 +11,7 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { minimum: 5, maximum: 100 }
   validates :body, presence: true
   validates :status, presence: true
+
+  scope :followed_by, ->(user) { where(author_id: user.followee_ids) }
+  scope :discoverable_by, ->(user) { where.not(author_id: user.followee_ids).where.not(author_id: user.id) }
 end
