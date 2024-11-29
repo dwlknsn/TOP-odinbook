@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, class_name: "Post", source: :likeable, source_type: "Post"
 
+  has_many :authored_comments, dependent: :destroy, class_name: "Comment", foreign_key: :author_id, inverse_of: :author
+  has_many :commented_posts, through: :authored_comments, class_name: "Post", source: :commentable, source_type: "Post"
+
   # users that follow you, i.e. you are the follower
   has_many :follower_followings, class_name: "Following", foreign_key: :follower_id, dependent: :destroy
   has_many :followees, through: :follower_followings

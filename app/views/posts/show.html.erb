@@ -1,11 +1,6 @@
 <%= link_to "Back", "#", class: "font-medium underline", data: { controller: "navigation", action: "navigation#back:prevent" } %>
 <%= render @post %>
-
-<div>
-  <% if current_user.id == @post.author_id %>
-    <%= link_to "Edit this post", edit_post_path(@post), class: "btn btn--secondary"  %>
-    <%= link_to "Destroy this post", @post, data: { turbo_method: :delete }, class: "btn btn--negative"  %>
-  <% end %>
-
-
+<div class="card flex flex-col gap">
+  <%= render partial: "comments/form", locals: { comment: Comment.new } %>
+  <%= render partial: "comments/comment", collection: @comments %>
 </div>

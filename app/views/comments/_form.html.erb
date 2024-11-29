@@ -1,0 +1,25 @@
+<div class="card border-dark flex flex-col gap">
+  <%= form_with(model: [@post, comment], html: { contents: true }) do |form| %>
+    <% if comment.errors.any? %>
+      <div class="alert alert--negative flex flex-col gap-half mbe-4" role="alert">
+        <h2 class="font-medium leading-none"><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+        <ul class="text-sm mis-3" style="list-style: disc">
+          <% comment.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="flex flex-col gap">
+      <%= form.hidden_field :commentable_id, value:  @post.id %>
+      <%= form.hidden_field :commentable_type, value:  @post.class.name %>
+    </div>
+    <div class="flex flex-col gap">
+      <%= form.label :body, class: "text-sm font-medium leading-none sr-only" %>
+      <%= form.text_field :body, class: "input" %>
+    </div>
+    <div class="flex justify-end">
+      <%= form.submit "Add comment", class: "btn btn--primary" %>
+    </div>
+  <% end %>
+</div>
