@@ -21,14 +21,32 @@
         <%= f.label :display_name %>
         <%= f.text_field :display_name, class: "input bg-shade border-dark" %>
       </div>
-      <div class="flex flex-col gap-half">
-        <%= f.label :avatar %>
-        <%= f.file_field :avatar, class: "input bg-shade border-dark" %>
-      </div>
-      <div class="flex flex-col gap-half">
-        Current Avatar
-        <%= image_tag(avatar_url(@profile.user), alt: "Avatar for #{@profile.display_name}", size: "200" ) %>
-      </div>
+
+      <p>Avatar</p>
+      <%= tag.div class: "flex items-center gap",
+                  data: {
+                    controller: "upload-preview",
+                    upload_preview_default_image_value: asset_url("default-picture.webp")
+                  } do %>
+        <%= f.label :avatar, "Avatar Preview", class: "btn btn--icon"  do %>
+
+          <%= f.file_field :avatar, class: "sr-only", accept: "image/*",
+                data: { upload_preview_target: "input", action: "upload-preview#previewImage" } %>
+          <%= image_tag "camera.svg", aria: { hidden: true } %>
+          <span class="sr-only">Upload avatar</span>
+
+        <% end %>
+
+        <div class="avatar" style="--avatar-size: 100px;">
+          <%= image_tag avatar_url(@profile.user), size: 100, alt: "Avatar", data: { upload_preview_target: "image" } %>
+        </div>
+
+        <label class="btn btn--icon btn--negative" data-action="click->upload-preview#clear">
+          <%= hidden_field_tag "remove_avatar", false, data: { upload_preview_target: "removeInput" } %>
+          <%= image_tag "minus.svg", size: 20, aria: { hidden: true } %>
+          <span class="sr-only">Remove avatar</span>
+        </label>
+      <% end %>
     </div>
 
     <div id="edit-profile-form-actions" class="flex gap justify-end">

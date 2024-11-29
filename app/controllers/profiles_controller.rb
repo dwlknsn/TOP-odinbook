@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    if @profile.update(profile_params)
+    if update_successs?
       redirect_to @profile
     else
       render :edit, status: :unprocessable_entity
@@ -23,5 +23,12 @@ class ProfilesController < ApplicationController
 
   def profile_params
     params.expect(profile: [ :username, :display_name, :avatar ])
+  end
+
+  def update_successs?
+    Profile.transaction do
+      @profile.avatar.purge if params[:remove_avatar] == "true"
+      @profile.update!(profile_params)
+    end
   end
 end
