@@ -9,6 +9,7 @@
 #   end
 
 # My user
+puts "Creating superuser"
 u = User.create!(
   email: "david@david.com",
   password: "password",
@@ -31,20 +32,31 @@ u.profile.update!(
   )
 
   u.profile.update!(
-    username: "user_#{n}",
+    username: "user_#{n + 1}",
     display_name: Faker::Name.name
   )
 end
 
-def create_posts(user)
-  3.times do
+puts "Creating posts"
+User.all.each do |user|
+  10.times do
     user.authored_posts.create!(
       title: Faker::Lorem.sentence(word_count: 5),
       body: Faker::Lorem.paragraphs(number: 3).join("\n\n"),
-    )
+      )
+    end
   end
-end
 
+puts "Creating comments, likes, and follows"
 User.all.each do |user|
-  create_posts(user)
+  posts = Post.where.not(author: user).sample(4)
+
+  posts.each do |post|
+    post.comments.create(author: user, body: Faker::Movies::PrincessBride.quote)
+    post.likes.create(user: user)
+  end
+
+  posts.map(&:author).uniq.each do |author|
+    author.followers << user
+  end
 end

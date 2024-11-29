@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users # Leave this line first.
+
   resources :posts do
     resources :likes, only: [ :create, :destroy ]
     resources :comments, only: [ :create, :update, :destroy ]
@@ -15,11 +17,7 @@ Rails.application.routes.draw do
     patch :block, to: "followings#block"
   end
 
-
   root "posts#index"
-
-  devise_for :users
-
 
 
 
