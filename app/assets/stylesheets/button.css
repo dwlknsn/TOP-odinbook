@@ -91,7 +91,7 @@
 
   &::after {
     animation: spin 1s linear infinite;
-    background-image: url("loader-circle.svg");
+    background-image: url("icons/loader-circle.svg");
     background-size: cover;
     block-size: var(--size-4);
     content: "";

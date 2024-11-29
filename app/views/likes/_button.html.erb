@@ -4,14 +4,20 @@
   <% if like.present? %>
     <%= form_with(model: like, url: like_path(like), method: :delete) do |f| %>
       <%= f.hidden_field :likeable_id, value: likeable.id %>
-      <%= f.hidden_field :likeable_type, value: "Post" %>
-      <%= f.submit "Remove Like", class: "btn btn--secondary" %>
+      <%= f.hidden_field :likeable_type, value: likeable.class.name %>
+      <%= button_tag type: :submit, class: "btn btn--icon" do %>
+        <%= image_tag "icons/heart-solid.svg", size: 20, aria: { hidden: true } %>
+        <span class="sr-only">Remove like from <%= likeable.class.name %></span>
+      <% end %>
     <% end %>
   <% else %>
     <%= form_with(model: Like.new, url: likes_path, method: :likeable) do |f| %>
       <%= f.hidden_field :likeable_id, value: likeable.id %>
       <%= f.hidden_field :likeable_type, value: likeable.class.name %>
-      <%= f.submit "Add Like", class: "btn btn--secondary" %>
+      <%= button_tag type: :submit, class: "btn btn--icon" do %>
+        <%= image_tag "icons/heart-outline.svg", size: 20, aria: { hidden: true } %>
+        <span class="sr-only">Add like to <%= likeable.class.name %></span>
+      <% end %>
     <% end %>
   <% end %>
 </div>
