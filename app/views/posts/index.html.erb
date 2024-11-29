@@ -3,5 +3,5 @@
   <%= link_to "Create Post", new_post_path, class: "btn btn--primary" %>
 </div>
 <div id="posts" class="flex flex-col gap">
-    <%= render partial: "post_preview", collection: @posts, as: :post  %>
+    <%= render partial: "preview", collection: @posts, as: :post  %>
 </div>

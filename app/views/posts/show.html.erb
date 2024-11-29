@@ -1,3 +1,4 @@
+<%= link_to "Back", "#", class: "font-medium underline", data: { controller: "navigation", action: "navigation#back:prevent" } %>
 <%= render @post %>
 
 <div>
@@ -6,5 +7,5 @@
     <%= link_to "Destroy this post", @post, data: { turbo_method: :delete }, class: "btn btn--negative"  %>
   <% end %>
 
-  <%= link_to "Back to posts", posts_path, class: "btn btn--borderless"  %>
+
 </div>

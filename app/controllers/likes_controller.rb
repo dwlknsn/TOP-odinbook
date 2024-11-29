@@ -10,7 +10,7 @@ class LikesController < ApplicationController
       flash[:error] = "failed"
     end
 
-    redirect_to @post
+    redirect_to request.referer
   end
 
   def destroy
@@ -22,7 +22,7 @@ class LikesController < ApplicationController
       flash[:error] = "failed"
     end
 
-    redirect_to @post
+    redirect_to request.referer
   end
 
   private
@@ -34,6 +34,6 @@ class LikesController < ApplicationController
   rescue_from ActiveRecord::RecordNotUnique do |error|
     flash[:error] = "You already liked this post"
     # flash[:error] = error.message
-    redirect_to @post
+    redirect_to request.referer
   end
 end

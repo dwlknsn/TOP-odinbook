@@ -5,15 +5,13 @@ class FollowingsController < ApplicationController
   def create
     following = current_user.follower_followings.build(followee: @user)
 
-    # debugger
-
     if following.save
       flash[:notice] = "Request to follow #{@user.display_name} sent."
-      redirect_to request.referer
     else
       flash[:error] = following.errors.full_messages.join(", ")
-      redirect_to request.referer
     end
+
+    redirect_to request.referer
   end
 
   def destroy
@@ -21,44 +19,47 @@ class FollowingsController < ApplicationController
 
     if following.destroy
       flash[:notice] = "You no longer follow #{@user.display_name}"
-      redirect_to request.referer
     else
       flash[:error] = following.errors.full_messages.join(", ")
-      redirect_to request.referer
     end
+
+    redirect_to request.referer
   end
 
   def accept
     following = current_user.follower_followings.find_by(follower: @user)
 
     if following.accept!
-      redirect_to @user, notice: "Follow request from #{@user.display_name} accepted"
+      flash[:notice] = "Follow request from #{@user.display_name} accepted"
     else
       flash[:error] = following.errors.full_messages.join(", ")
-      redirect_to @user
     end
+
+    redirect_to request.referer
   end
 
   def decline
     following = current_user.follower_followings.find_by(follower: @user)
 
     if following.decline!
-      redirect_to @user, notice: "Follow request from #{@user.display_name} declined"
+      flash[:notice] = "Follow request from #{@user.display_name} declined"
     else
       flash[:error] = following.errors.full_messages.join(", ")
-      redirect_to @user
     end
+
+    redirect_to request.referer
   end
 
   def block
     following = current_user.follower_followings.find_by(follower: @user)
 
     if following.block!
-      redirect_to @user, notice: "#{@user.display_name} blocked"
+      flash[:notice] = "#{@user.display_name} blocked"
     else
       flash[:error] = following.errors.full_messages.join(", ")
-      redirect_to @user
     end
+
+    redirect_to request.referer
   end
 
   private

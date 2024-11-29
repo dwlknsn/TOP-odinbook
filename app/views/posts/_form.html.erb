@@ -29,15 +29,9 @@
     <div>
       <%= form.submit "Submit", class: "btn btn--primary" %>
     </div>
-    <% if action_name == "edit" %>
-      <div>
-        <%= link_to "Discard Changes", @post, class: "btn btn--secondary" %>
-      </div>
-    <% else %>
-      <div>
-        <%= link_to "Back to posts", posts_path, class: "btn btn--secondary"  %>
-      </div>
-    <% end %>
+    <div>
+      <%= link_to "Discard Changes", "#", class: "btn btn--negative", data: { controller: "navigation", action: "navigation#back:prevent" } %>
+    </div>
   </div>
 
 <% end %>

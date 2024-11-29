@@ -4,6 +4,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes([ :profile, :followees ]).find(params[:id])
+    @user = User.includes([ :profile, :followees, :authored_posts ]).find(params[:id])
   end
 end
