@@ -10,7 +10,6 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     @post = Post.find(params[:id])
-    @like = @post.likes.find_by(user_id: current_user.id)
     @comments = @post.comments.includes(author: :profile).order(created_at: :desc)
   end
 

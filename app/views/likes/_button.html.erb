@@ -1,0 +1,17 @@
+<div class="flex gap items-center">
+  <div><%= likeable.likes.count %></div>
+  <% like = current_user.likes.find_by(likeable: likeable) %>
+  <% if like.present? %>
+    <%= form_with(model: like, url: like_path(like), method: :delete) do |f| %>
+      <%= f.hidden_field :likeable_id, value: likeable.id %>
+      <%= f.hidden_field :likeable_type, value: "Post" %>
+      <%= f.submit "Remove Like", class: "btn btn--secondary" %>
+    <% end %>
+  <% else %>
+    <%= form_with(model: Like.new, url: likes_path, method: :likeable) do |f| %>
+      <%= f.hidden_field :likeable_id, value: likeable.id %>
+      <%= f.hidden_field :likeable_type, value: likeable.class.name %>
+      <%= f.submit "Add Like", class: "btn btn--secondary" %>
+    <% end %>
+  <% end %>
+</div>

@@ -18,23 +18,15 @@
       <em>- <%= post.author.display_name %> (@<%= post.author.username %> )</em>
     </div>
     <div id="actions" class="flex gap justify-end">
-      <% if current_user.id == @post.author_id %>
+      <% if current_user.id == post.author_id %>
         <div>
-          <%= link_to "Edit this post", edit_post_path(@post), class: "btn btn--secondary"  %>
+          <%= link_to "Edit this post", edit_post_path(post), class: "btn btn--secondary"  %>
         </div>
         <div>
-          <%= link_to "Destroy this post", @post, data: { turbo_method: :delete }, class: "btn btn--negative"  %>
+          <%= link_to "Destroy this post", post, data: { turbo_method: :delete }, class: "btn btn--negative"  %>
         </div>
       <% else %>
-        <div>
-          <% if @like.present? %>
-            <%= link_to("Remove Like", post_like_path(post, @like), class: "btn btn--secondary",
-                  data: { turbo_method: :delete }) %>
-          <% else %>
-            <%= link_to("Like", post_likes_path(post), class: "btn btn--secondary",
-                  data: { turbo_method: :post }) %>
-          <% end %>
-        </div>
+        <%= render 'likes/button', likeable: post %>
       <% end %>
     </div>
   </div>

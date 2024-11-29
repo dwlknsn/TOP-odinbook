@@ -1,13 +1,11 @@
 class LikesController < ApplicationController
-  before_action :set_post
-
   def create
-    like = @post.likes.build(user: current_user)
+    like = current_user.likes.build(like_params)
 
     if like.save
-      flash[:notice] = "You liked this post"
+      flash[:notice] = "You liked this #{like.likeable_type}"
     else
-      flash[:error] = "failed"
+      flash[:error] = "Failed with:\n\n#{like.errors.full_messages.join("\n")}"
     end
 
     redirect_to request.referer
@@ -17,9 +15,9 @@ class LikesController < ApplicationController
     like = current_user.likes.find(params[:id])
 
     if like.destroy
-      flash[:notice] = "You removed a like from this post"
+      flash[:notice] = "You removed a like from this #{like.likeable_type}"
     else
-      flash[:error] = "failed"
+      flash[:error] = "Failed with:\n\n#{like.errors.full_messages.join("\n")}"
     end
 
     redirect_to request.referer
@@ -27,13 +25,7 @@ class LikesController < ApplicationController
 
   private
 
-  def set_post
-    @post ||= Post.find(params[:post_id])
-  end
-
-  rescue_from ActiveRecord::RecordNotUnique do |error|
-    flash[:error] = "You already liked this post"
-    # flash[:error] = error.message
-    redirect_to request.referer
+  def like_params
+    @like_params ||= params.expect(like: [ :likeable_id, :likeable_type ])
   end
 end

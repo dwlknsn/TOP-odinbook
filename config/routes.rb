@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   devise_for :users # Leave this line first.
 
   resources :posts do
-    resources :likes, only: [ :create, :destroy ]
     resources :comments, only: [ :create, :update, :destroy ]
   end
+  resources :likes, only: [ :create, :destroy ]
 
   resource :profile
   resolve("Profile") { [ :profile ] }
