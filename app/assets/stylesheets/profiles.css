@@ -1,33 +1,4 @@
-.profile-card {
-  flex-grow: 1;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-}
-
-.profile-card-image {
-  align-self: center;
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  justify-self: center;
-}
-
-.profile-card-image img {
-  border-radius: var(--rounded-full);
-  border-width: var(--border);
-  height: 100%;
-  max-height: 100px;
-  justify-content: center;
-  object-fit: cover;
-  padding: var(--size-2);
-  width: 100%;
-  max-width: 100px;
-}
-
-.profile-card-info {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-}
-.profile-card-actions {
-  grid-column: 3;
-  grid-row: 1 / span 2;
+.avatar {
+  height: 100px;
+  width: 100px;
 }

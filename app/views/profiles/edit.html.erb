@@ -1,30 +1,44 @@
-<h1>Editing <%= @profile.display_name %></h1>
+<div id="<%= dom_id @profile %>" class="card bg-main">
+  <%= form_with model: @profile, method: :patch, class: "flex flex-col gap " do |f| %>
 
-<%= form_with model: @profile, method: :patch do |f| %>
-  <% @profile.errors.each do |error| %>
-    <div>
-      <%= error.full_message %>
+    <% if @profile.errors.any? %>
+      <div class="border-dark rounded bg-shade text-negative p-6">
+        <% @profile.errors.each do |error| %>
+          <div>
+            <%= error.full_message %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="flex flex-col gap">
+      <div class="flex flex-col gap-half">
+        <%= f.label :username %>
+        <%= f.text_field :username, class: "input bg-shade border-dark" %>
+      </div>
+      <div class="flex flex-col gap-half">
+        <%= f.label :display_name %>
+        <%= f.text_field :display_name, class: "input bg-shade border-dark" %>
+      </div>
+      <div class="flex flex-col gap-half">
+        <%= f.label :avatar %>
+        <%= f.file_field :avatar, class: "input bg-shade border-dark" %>
+      </div>
+      <div class="flex flex-col gap-half">
+        Current Avatar
+        <%= image_tag(avatar_url(@profile.user), alt: "Avatar for #{@profile.display_name}", size: "200" ) %>
+      </div>
+    </div>
+
+    <div id="edit-profile-form-actions" class="flex gap justify-end">
+      <div>
+        <%= f.submit "Update Profile", class: "btn btn--positive" %>
+      </div>
+      <div>
+        <%= link_to "Discard changes", profile_path, class: "btn btn--negative" %>
+      </div>
     </div>
   <% end %>
-  <div>
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-  </div>
-  <div>
-    <%= f.label :display_name %>
-    <%= f.text_field :display_name %>
-  </div>
-  <div>
-    <%= f.label :avatar %>
-    <%= f.file_field :avatar %>
-  </div>
-  <div>
-    Current Avatar
-    <%= image_tag(avatar_url(@profile.user), alt: "Avatar for #{@profile.display_name}") %>
-  </div>
-  <div>
-    <%= f.submit %>
-  </div>
-<% end %>
 
-<%= link_to "Back to profile", profile_path %>
+
+</div>
