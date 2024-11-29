@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
 
-  root "users#index"
+  root "posts#index"
 
   devise_for :users
 
