@@ -4,7 +4,7 @@ class Comment < ApplicationRecord
   has_many :likes, as: :likeable
   has_many :comments, as: :commentable
 
-  validates :body, presence: true, length: { minimum: 5 }
+  validates :body, presence: true
 
   def soft_delete!
     update!(
