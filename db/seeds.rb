@@ -9,9 +9,10 @@
 #   end
 
 # My user
-puts "Creating superuser"
+email = "david@david.com"
+puts "Creating superuser  #{email}"
 u = User.create!(
-  email: "david@david.com",
+  email: email,
   password: "password",
   password_confirmation: "password"
 )
@@ -21,9 +22,11 @@ u.profile.update!(
   display_name: "David Superuser"
 )
 
+puts
+puts "Creating users"
 5.times do |n|
   email = Faker::Internet.unique.email
-  puts "creating user: #{email}"
+  print "."
 
   u = User.create!(
     email: email,
@@ -37,26 +40,37 @@ u.profile.update!(
   )
 end
 
+puts
 puts "Creating posts"
 User.all.each do |user|
   10.times do
+  print "."
     user.authored_posts.create!(
       title: Faker::Lorem.sentence(word_count: 5),
-      body: Faker::Lorem.paragraphs(number: 3).join("\n\n"),
+      content: Faker::Lorem.paragraphs(number: 3).join("\n\n"),
       )
     end
   end
 
+puts
 puts "Creating comments, likes, and follows"
 User.all.each do |user|
-  posts = Post.where.not(author: user).sample(4)
+  posts = Post.where.not(author: user).sample(10)
 
   posts.each do |post|
+    print "."
     post.comments.create(author: user, body: Faker::Movies::PrincessBride.quote)
     post.likes.create(user: user)
   end
 
-  posts.map(&:author).uniq.each do |author|
+  User.where.not(id: user.id).sample(2).each do |author|
     author.followers << user
+  end
+end
+
+User.all.each do |user|
+  Comment.where.not(author: user).sample(5).each do |comment|
+    print "."
+    comment.comments.create(author: user, body: Faker::Movies::Lebowski.quote)
   end
 end

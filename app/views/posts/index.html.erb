@@ -8,10 +8,10 @@
     <button id="trigger_discover" class="btn btn--tab border-dark" data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_discover">Discover</button>
   </div>
   <div>
-    <div hidden id="tab_followed" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_followed", class="flex flex-col gap items-center">
+    <div hidden id="tab_followed" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_followed", class="flex flex-col gap">
       <%= render partial: "preview", collection: @my_posts, as: :post  %>
     </div>
-    <div hidden id="tab_discover" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_discover", class="flex flex-col gap items-center">
+    <div hidden id="tab_discover" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_discover", class="flex flex-col gap">
       <%= render partial: "preview", collection: @discoverable_posts, as: :post  %>
     </div>
   </div>

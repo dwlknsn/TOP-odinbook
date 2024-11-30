@@ -1,6 +1,4 @@
 <div class="flex flex-col gap">
-
   <%= render "profiles/preview", profile: profile%>
-
   <%= render partial: "posts/preview", collection: profile.user.authored_posts, as: :post  %>
 </div>
