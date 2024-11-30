@@ -26,7 +26,9 @@ class CommentsController < ApplicationController
   def destroy
     @comment = current_user.authored_comments.find(params[:id])
 
-    if @comment.destroy!
+    deletion_method = @comment.comments.any? ? :soft_delete! : :destroy!
+
+    if @comment.send(deletion_method)
       flash[:notice] = "Comment was successfully destroyed."
     else
       flash[:error] = "Failed with:\n\n#{@comment.errors.full_messages.join("\n")}"

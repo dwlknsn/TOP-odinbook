@@ -1,30 +1,36 @@
 <div id="<%= dom_id comment %>" class="flex flex-col gap-half card bg-main mis-8">
-  <div class="flex gap items-center">
-    <%= link_to(user_path(comment.author)) do %>
-      <div class="border p-2 bg-shade rounded-full avatar",  style="--avatar-size: 50px;">
-        <%= image_tag(avatar_url_for(comment.author), alt: "Avatar for #{comment.author.display_name}", class: "avatar rounded-full object-cover") %>
+  <% if comment.soft_deleted? %>
+    <em class="text-subtle">
+      <%= comment.body %>
+    </em>
+  <% else %>
+    <div class="flex gap items-center">
+      <%= link_to(user_path(comment.author)) do %>
+        <div class="border p-2 bg-shade rounded-full avatar",  style="--avatar-size: 50px;">
+          <%= image_tag(avatar_url_for(comment.author), alt: "Avatar for #{comment.author.display_name}", class: "avatar rounded-full object-cover") %>
+        </div>
+      <% end %>
+      <div class="text-subtle">
+        <em>
+          <%= link_to(comment.author.display_name, user_path(comment.author)) %> -- <%= time_ago_in_words(comment.created_at) %> ago
+        </em>
       </div>
-    <% end %>
-    <div class="text-subtle">
-      <em>
-        <%= link_to(comment.author.display_name, user_path(comment.author)) %> -- <%= time_ago_in_words(comment.created_at) %> ago
-      </em>
     </div>
-  </div>
-  <div class="p-8 border-b">
-    <%= comment.body %>
-  </div>
-  <div id="actions" class="flex justify-end">
-    <% if current_user == comment.author %>
-      <div id="author-actions"class="flex gap underline">
-        <%= link_to "Delete", comment_path(comment), data: { turbo_method: :delete } %>
-      </div>
-    <% else %>
-      <%= render 'likes/button', likeable: comment %>
-    <% end %>
-  </div>
+    <div class="p-8 border-b">
+      <%= comment.body %>
+    </div>
+    <div id="actions" class="flex justify-end">
+      <% if current_user == comment.author %>
+        <div id="author-actions"class="flex gap underline">
+          <%= link_to "Delete", comment_path(comment), data: { turbo_method: :delete } %>
+        </div>
+      <% else %>
+        <%= render 'likes/button', likeable: comment %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
+<%= render partial: 'comments/form', locals: { commentable: comment, comment: Comment.new } %>
 <div class="child-comment mis-8 flex flex-col gap-half">
-  <%= render partial: 'comments/form', locals: { commentable: comment, comment: Comment.new } %>
   <%= render comment.comments  %>
 </div>

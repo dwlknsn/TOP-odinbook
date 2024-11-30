@@ -5,4 +5,15 @@ class Comment < ApplicationRecord
   has_many :comments, as: :commentable
 
   validates :body, presence: true, length: { minimum: 5 }
+
+  def soft_delete!
+    update!(
+      deleted_at: Time.now,
+      body: "[DELETED]"
+    )
+  end
+
+  def soft_deleted?
+    deleted_at.present?
+  end
 end
