@@ -1,4 +1,4 @@
-<div id="<%= dom_id post %>" class="card prose bg-main flex">
+<div id="<%= dom_id post %>" class="card bg-main flex">
   <div class="flex flex-col gap">
     <div class="avatar border p-2 bg-shade",  style="--avatar-size: 100px;">
       <%= image_tag(avatar_url_for(post.author), alt: "Avatar", class: "avatar rounded-full object-cover") %>
@@ -7,7 +7,7 @@
       <%= time_ago_in_words(post.created_at) %> ago
     </div>
   </div>
-  <div class="flex flex-col gap mis-8 pis-8 border-is border-dark">
+  <div class="flex flex-col gap mis-8 pis-8 border-is border-dark prose">
     <h3 class="mb">
       <%= post.title %>
     </h3>

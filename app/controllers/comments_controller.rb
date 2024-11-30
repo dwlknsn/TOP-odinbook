@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:notice] = "Comment was successfully created."
     else
-      flash[:error] = "failed"
+      flash[:error] = "Failed with:\n\n#{@comment.errors.full_messages.join("\n")}"
     end
 
     redirect_to request.referer
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       flash[:notice] = "Comment was successfully updated."
     else
-      flash[:error] = "failed"
+      flash[:error] = "Failed with:\n\n#{@comment.errors.full_messages.join("\n")}"
     end
 
     redirect_to request.referer
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     if @comment.destroy!
       flash[:notice] = "Comment was successfully destroyed."
     else
-      flash[:error] = "failed"
+      flash[:error] = "Failed with:\n\n#{@comment.errors.full_messages.join("\n")}"
     end
 
     redirect_to request.referer

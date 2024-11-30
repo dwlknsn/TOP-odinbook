@@ -1,6 +1,8 @@
-<%= link_to "Back", "#", class: "font-medium underline", data: { controller: "navigation", action: "navigation#back:prevent" } %>
-<%= render @post %>
-<div class="card flex flex-col gap">
-  <%= render partial: "comments/form", locals: { comment: Comment.new } %>
-  <%= render partial: "comments/comment", collection: @comments %>
+<div class="flex flex-col gap">
+  <%= link_to "Back", "#", class: "font-medium underline", data: { controller: "navigation", action: "navigation#back:prevent" } %>
+  <%= render @post %>
+  <%= render partial: "comments/form", locals: { commentable: @post, comment: Comment.new } %>
+  <div class="card flex flex-col gap">
+    <%= render partial: "comments/comment", collection: @comments %>
+  </div>
 </div>
