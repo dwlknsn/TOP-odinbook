@@ -1,31 +1,37 @@
 class LikesController < ApplicationController
   def create
-    like = current_user.likes.build(like_params)
+    @like = current_user.likes.build(like_params)
 
-    if like.save
-      flash[:notice] = "You liked this #{like.likeable_type}"
-    else
-      flash[:error] = "Failed with:\n\n#{like.errors.full_messages.join("\n")}"
+    respond_to do |format|
+      if @like.save
+        format.turbo_stream
+      else
+        flash[:error] = error_message(@like)
+        format.html { redirect_to request.referer }
+      end
     end
-
-    redirect_to request.referer
   end
 
   def destroy
-    like = current_user.likes.find(params[:id])
+    @like = current_user.likes.find(params[:id])
 
-    if like.destroy
-      flash[:notice] = "You removed a like from this #{like.likeable_type}"
-    else
-      flash[:error] = "Failed with:\n\n#{like.errors.full_messages.join("\n")}"
+    respond_to do |format|
+      if @like.destroy
+        format.turbo_stream
+      else
+        flash[:error] = error_message(@like)
+        format.html { redirect_to request.referer }
+      end
     end
-
-    redirect_to request.referer
   end
 
   private
 
   def like_params
     @like_params ||= params.expect(like: [ :likeable_id, :likeable_type ])
+  end
+
+  def error_message(like)
+    "Failed with:\n\n#{@like.errors.full_messages.to_sentence}"
   end
 end
