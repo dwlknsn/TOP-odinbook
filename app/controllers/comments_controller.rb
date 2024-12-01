@@ -2,13 +2,15 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.authored_comments.build(comment_params)
 
-    if @comment.save
-      flash[:notice] = "Comment was successfully created."
-    else
-      flash[:error] = "Failed with:\n\n#{@comment.errors.full_messages.join("\n")}"
+    respond_to do |format|
+      if @comment.save
+        flash[:notice] = "Comment was successfully created."
+        format.turbo_stream
+      else
+        flash[:error] = "Failed with:\n\n#{@comment.errors.full_messages.join("\n")}"
+        redirect_to request.referer
+      end
     end
-
-    redirect_to request.referer
   end
 
   def update

@@ -1,0 +1,7 @@
+<%#
+  Note - the turbo_stream_from needs a style adjustment to counter the extra gap it adds
+ %>
+<%= turbo_stream_from commentable, style: "margin-top: -1rem;" %>
+<div id="comments-for-<%= dom_id commentable %>" class="flex flex-col gap mis-8">
+  <%= render partial: "comments/comment", collection: commentable.comments.order(id: :desc) %>
+</div>

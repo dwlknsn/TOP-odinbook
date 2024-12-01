@@ -8,24 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# My user
-email = "david@david.com"
-puts "Creating superuser  #{email}"
-u = User.create!(
-  email: email,
-  password: "password",
-  password_confirmation: "password"
-)
-
-u.profile.update!(
-  username: "davidsuperuser",
-  display_name: "David Superuser"
-)
-
 puts
 puts "Creating users"
-5.times do |n|
-  email = Faker::Internet.unique.email
+%w[ david billy bobby tammy tommy ziggy].each do |name|
+  email = "#{name}@d.com"
   print "."
 
   u = User.create!(
@@ -35,7 +21,7 @@ puts "Creating users"
   )
 
   u.profile.update!(
-    username: "user_#{n + 1}",
+    username: name,
     display_name: Faker::Name.name
   )
 end

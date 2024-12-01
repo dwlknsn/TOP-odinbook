@@ -1,5 +1,5 @@
-<div id="<%= dom_id comment %>" class="" data-controller="commentable">
-  <div class=" card bg-main mis-8 flex flex-col gap-half">
+<div id="<%= dom_id comment %>" class="flex flex-col gap-half" data-controller="commentable">
+  <div class="card bg-main mis-8">
     <% if comment.soft_deleted? %>
       <em class="text-subtle">
         <%= comment.body %>
@@ -38,6 +38,4 @@
     <%= render partial: 'comments/form', locals: { commentable: comment, comment: Comment.new } %>
   <% end %>
 </div>
-<div class="child-comment mis-8 flex flex-col gap">
-  <%= render comment.comments  %>
-</div>
+<%= render partial: "comments/comments", locals: { commentable: comment } %>

@@ -2,14 +2,23 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="commentable"
 export default class extends Controller {
-  static targets = [ "formContainer", "replyButton", "input" ]
+  static targets = [ "formContainer", "replyButton", "form" ]
 
   connect() {}
 
-  toggle(event) {
-    event.preventDefault()
+  toggle() {
     this.formContainerTarget.classList.toggle("hide@sm")
     this.replyButtonTarget.toggleAttribute("disabled")
-    this.inputTarget.value = ""
+  }
+
+  resetForm() {
+    this.formTarget.reset()
+    this.toggle()
+  }
+
+  discardComment(event) {
+    event.preventDefault()
+    this.resetForm()
+    this.toggle()
   }
 }

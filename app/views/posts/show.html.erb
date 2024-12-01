@@ -2,7 +2,5 @@
   <%= link_to "Back", "#", class: "font-medium underline", data: { controller: "navigation", action: "navigation#back:prevent" } %>
   <%= render @post %>
   <%= render partial: "comments/form", locals: { commentable: @post, comment: Comment.new } %>
-  <div class="flex flex-col gap">
-    <%= render partial: "comments/comment", collection: @comments %>
-  </div>
+  <%= render partial: "comments/comments", locals: { commentable: @post } %>
 </div>
