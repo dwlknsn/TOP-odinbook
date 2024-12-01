@@ -1,62 +1,33 @@
 class FollowingsController < ApplicationController
-  before_action :set_follower
-  before_action :set_followee
+  before_action :set_following, only: [ :update, :destroy ]
 
   def create
-    following = current_user.follower_followings.build(followee: @user)
+    @following = Following.build(following_params)
 
-    if following.save
+    if @following.save
       flash[:notice] = "Request to follow #{@user.display_name} sent."
     else
-      flash[:error] = following.errors.full_messages.join(", ")
+      flash[:error] = error_message(@following)
+    end
+
+    redirect_to request.referer
+  end
+
+  def update
+    if @following.update(following_params)
+      flash[:notice] = "Accepted."
+    else
+      flash[:error] = error_message(@following)
     end
 
     redirect_to request.referer
   end
 
   def destroy
-    following = current_user.follower_followings.find_by(followee: @user)
-
-    if following.destroy
+    if @following.destroy
       flash[:notice] = "You no longer follow #{@user.display_name}"
     else
-      flash[:error] = following.errors.full_messages.join(", ")
-    end
-
-    redirect_to request.referer
-  end
-
-  def accept
-    following = current_user.follower_followings.find_by(follower: @user)
-
-    if following.accept!
-      flash[:notice] = "Follow request from #{@user.display_name} accepted"
-    else
-      flash[:error] = following.errors.full_messages.join(", ")
-    end
-
-    redirect_to request.referer
-  end
-
-  def decline
-    following = current_user.follower_followings.find_by(follower: @user)
-
-    if following.decline!
-      flash[:notice] = "Follow request from #{@user.display_name} declined"
-    else
-      flash[:error] = following.errors.full_messages.join(", ")
-    end
-
-    redirect_to request.referer
-  end
-
-  def block
-    following = current_user.follower_followings.find_by(follower: @user)
-
-    if following.block!
-      flash[:notice] = "#{@user.display_name} blocked"
-    else
-      flash[:error] = following.errors.full_messages.join(", ")
+      flash[:error] = error_message(@following)
     end
 
     redirect_to request.referer
@@ -64,11 +35,23 @@ class FollowingsController < ApplicationController
 
   private
 
-  def set_follower
-    current_user
+  def set_following
+    @following ||= Following.find_by(id: params[:id], follower: follower, followee: followee)
   end
 
-  def set_followee
-    @user = User.find(params[:user_id])
+  def following_params
+    @following_params ||= params.expect(following: [ :follower_id, :followee_id, :status ])
+  end
+
+  def follower
+    @follower ||= User.find(following_params[:follower_id])
+  end
+
+  def followee
+    @followee ||= User.find(following_params[:followee_id])
+  end
+
+  def error_message(following)
+    "Failed with:\n\n#{@following.errors.full_messages.to_sentence}"
   end
 end

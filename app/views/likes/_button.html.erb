@@ -12,7 +12,7 @@
         <% end %>
       <% end %>
     <% else %>
-      <%= form_with(model: Like.new, url: likes_path, method: :likeable) do |f| %>
+      <%= form_with(model: Like.new, url: likes_path, method: :post) do |f| %>
         <%= f.hidden_field :likeable_id, value: likeable.id %>
         <%= f.hidden_field :likeable_type, value: likeable.class.name %>
         <%= button_tag type: :submit, class: "btn btn--icon" do %>

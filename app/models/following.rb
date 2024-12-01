@@ -11,18 +11,6 @@ class Following < ApplicationRecord
 
   validate :cannot_follow_self
 
-  def accept!
-    accepted!
-  end
-
-  def decline!
-    declined!
-  end
-
-  def block!
-    blocked!
-  end
-
   private
 
   def cannot_follow_self
