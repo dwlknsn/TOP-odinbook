@@ -9,10 +9,12 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    if update_successs?
-      redirect_to @profile
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if update_successs?
+        format.turbo_stream
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
