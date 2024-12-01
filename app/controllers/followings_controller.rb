@@ -1,54 +1,53 @@
 class FollowingsController < ApplicationController
-  before_action :set_following, only: [ :update, :destroy ]
-
   def create
-    @following = Following.build(following_params)
+    @following = current_user.followings_as_follower.build(following_params)
+    @followee = @following.followee
 
-    if @following.save
-      flash[:notice] = "Request to follow #{@user.display_name} sent."
-    else
-      flash[:error] = error_message(@following)
+    respond_to do |format|
+      if @following.save
+        flash.now[:notice] = "Follow request sent to #{@followee.display_name}"
+        format.turbo_stream
+      else
+        flash[:error] = error_message(@following)
+        format.html { redirect_to request.referer }
+      end
     end
-
-    redirect_to request.referer
   end
 
   def update
-    if @following.update(following_params)
-      flash[:notice] = "Accepted."
-    else
-      flash[:error] = error_message(@following)
-    end
+    @following = current_user.followings_as_followee.find(params[:id])
+    @followee = @following.followee
 
-    redirect_to request.referer
+    respond_to do |format|
+      if @following.update(following_params)
+        flash.now[:notice] = "Follower #{@following.status}"
+        format.turbo_stream
+      else
+        flash[:error] = error_message(@following)
+        format.html { redirect_to request.referer }
+      end
+    end
   end
 
   def destroy
-    if @following.destroy
-      flash[:notice] = "You no longer follow #{@user.display_name}"
-    else
-      flash[:error] = error_message(@following)
-    end
+    @following = current_user.followings_as_follower.find(params[:id])
+    @followee = @following.followee
 
-    redirect_to request.referer
+    respond_to do |format|
+      if @following.destroy
+        flash.now[:notice] = "Follow request cancelled"
+        format.turbo_stream
+      else
+        flash[:error] = error_message(@following)
+        format.html { redirect_to request.referer }
+      end
+    end
   end
 
   private
 
-  def set_following
-    @following ||= Following.find_by(id: params[:id], follower: follower, followee: followee)
-  end
-
   def following_params
-    @following_params ||= params.expect(following: [ :follower_id, :followee_id, :status ])
-  end
-
-  def follower
-    @follower ||= User.find(following_params[:follower_id])
-  end
-
-  def followee
-    @followee ||= User.find(following_params[:followee_id])
+    @following_params ||= params.expect(following: [ :followee_id, :status ])
   end
 
   def error_message(following)

@@ -1,1 +1,1 @@
-<%= render "profiles/full", profile: @profile %>
+<%= render partial: "profiles/full", locals: { profile: @profile, followings: @followings } %>

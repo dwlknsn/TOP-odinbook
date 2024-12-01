@@ -1,5 +1,3 @@
-<div id="<%= dom_id user %>" class="">
-
-  <%= render "profiles/preview", profile: user.profile %>
-
+<div id="<%= dom_id user %>">
+  <%= render partial: "profiles/preview", locals: { profile: user.profile, preview: true} %>
 </div>

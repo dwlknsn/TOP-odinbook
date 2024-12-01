@@ -7,37 +7,31 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= yield :head %>
-
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :all, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body class="sidebar-layout">
     <header id="header" class="">
       <div class="container">
         <h1 class="font-bold text-2xl">Odinbook</h1>
       </div>
     </header>
-
     <div id="sidebar" class="">
       <div class="container">
         <%#= yield(:sidebar) %>
         <%= render "shared/sidebar" %>
       </div>
     </div>
-
     <main id="main" class="bg-shade">
       <div class="container flex flex-col gap">
+        <%= link_to "Back", "#", class: "font-medium underline", data: { controller: "navigation", action: "navigation#back:prevent" } %>
         <%= render 'shared/flash_messages' %>
         <%= yield %>
       </div>

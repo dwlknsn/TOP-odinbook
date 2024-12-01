@@ -1,0 +1,2 @@
+<%= turbo_stream.replace("#{dom_id(@followee)}-follow-request-buttons", partial: "followings/request_buttons",
+      locals: { following: @following, follower: @follower, followee: @followee }) %>

@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :set_profile
 
   def show
-    @followings = @profile.user.followings_as_followee.includes(follower: :profile)
+    @followings = @profile.user.followings_as_followee.includes(follower: :profile).order(:id)
   end
 
   def edit

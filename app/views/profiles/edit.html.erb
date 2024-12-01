@@ -1,5 +1,5 @@
 <div id="<%= dom_id @profile %>" class="card bg-main">
-  <%= form_with model: @profile, method: :patch, class: "flex flex-col gap " do |f| %>
+  <%= form_with(model: @profile, method: :patch, class: "flex flex-col gap") do |f| %>
     <% if @profile.errors.any? %>
       <div class="border-dark rounded bg-shade text-negative p-6">
         <% @profile.errors.each do |error| %>
@@ -42,10 +42,10 @@
     </div>
     <div id="edit-profile-form-actions" class="flex gap justify-end">
       <div>
-        <%= f.submit "Update Profile", class: "btn btn--positive" %>
+        <%= f.submit("Update Profile", class: "btn btn--positive") %>
       </div>
       <div>
-        <%= link_to "Discard changes", profile_path, class: "btn btn--negative" %>
+        <%= link_to("Discard changes", profile_path, class: "btn btn--negative") %>
       </div>
     </div>
   <% end %>
