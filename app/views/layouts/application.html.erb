@@ -22,6 +22,10 @@
       <div class="container">
         <h1 class="font-bold text-2xl">Odinbook</h1>
       </div>
+      <div data-controller="dark-mode" class="flex gap justify-end avatar">
+        <%= image_tag("icons/moon.svg", size: 30, class: "btn btn--icon hide@sm", aria: { hidden: true }, data: { dark_mode_target: "darkIcon", action: 'click->dark-mode#toggleTheme'}) %>
+        <%= image_tag("icons/sun.svg", size: 30, class: "btn btn--icon hide@sm", aria: { hidden: true }, data: { dark_mode_target: "lightIcon", action: 'click->dark-mode#toggleTheme'}) %>
+      </div>
     </header>
     <div id="sidebar" class="">
       <div class="container">
