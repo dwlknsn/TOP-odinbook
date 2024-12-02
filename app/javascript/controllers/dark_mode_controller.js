@@ -5,27 +5,39 @@ export default class extends Controller {
   static targets = [ "lightIcon", "darkIcon", "themeToggle" ]
 
   connect() {
-    console.log("Dark mode controller connected")
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      console.log("Current theme = dark")
-      this.lightIconTarget.classList.remove('hide@sm');
-    } else {
-      console.log("Current theme = light")
-      this.darkIconTarget.classList.remove('hide@sm');
-    }
+    this.#setInitialTheme()
   }
 
   toggleTheme() {
-    console.log("Toggling theme")
-    this.lightIconTarget.classList.toggle('hide@sm');
-    this.darkIconTarget.classList.toggle('hide@sm');
-
     if (localStorage.getItem('color-theme') === 'dark') {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('color-theme', 'light');
+      this.#setThemeToLight()
     } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('color-theme', 'dark');
+      this.#setThemeToDark()
     }
+  }
+
+  #setInitialTheme() {
+    if (localStorage.getItem('color-theme') === 'dark') {
+      this.#setThemeToDark()
+    } else if (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      this.#setThemeToDark()
+    } else {
+      this.#setThemeToLight()
+    }
+  }
+
+  #setThemeToLight() {
+    this.lightIconTarget.classList.add('hide@sm');
+    this.darkIconTarget.classList.remove('hide@sm');
+    document.body.classList.remove('dark');
+    localStorage.setItem('color-theme', 'light');
+  }
+
+  #setThemeToDark() {
+    this.lightIconTarget.classList.remove('hide@sm');
+    this.darkIconTarget.classList.add('hide@sm');
+    document.body.classList.add('dark');
+    localStorage.setItem('color-theme', 'dark');
+
   }
 }
