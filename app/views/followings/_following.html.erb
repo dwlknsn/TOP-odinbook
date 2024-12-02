@@ -1,10 +1,9 @@
-<%= turbo_frame_tag("#{dom_id(following)}-review-buttons") do %>
+<%= turbo_frame_tag("#{dom_id(following)}") do %>
   <div id="<%= dom_id(following) %>" class="flex gap grow card items-center pis-6">
     <div class="border p-2 rounded-full avatar",  style="--avatar-size: 50px;">
       <%= image_tag(avatar_url_for(following.follower), alt: "Avatar for #{following.follower.display_name}", class: "avatar rounded-full object-cover") %>
     </div>
     <div class="grow pis-8"><%= following.follower.display_name %> (@<%= following.follower.username %>)</div>
-    <div><%= following.status %></div>
     <div>
       <%= form_with(model: following, url: following_path(following), method: :patch) do |f| %>
         <%= f.hidden_field :follower_id, value: following.follower.id %>

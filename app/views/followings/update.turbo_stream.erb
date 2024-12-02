@@ -1,1 +1,2 @@
-<%= turbo_stream.replace "#{dom_id(@following)}-review-buttons", partial: "following", locals: { following: @following } %>
+<%= turbo_stream.remove "#{dom_id(@following)}" %>
+<%= turbo_stream.prepend "tab_#{@following.status}_followers", partial: "following", locals: { following: @following } %>

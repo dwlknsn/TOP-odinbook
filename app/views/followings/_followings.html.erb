@@ -1,8 +1,27 @@
 <div id="follower-requests" class="flex flex-col gap card">
   <div>
-    <h1 class="text-3xl">Follower requests</h1>
+    <h1 class="text-3xl">Followers</h1>
   </div>
-  <div class="flex flex-col gap">
-    <%= render partial: "followings/following", collection: followings %>
+  <div class="flex flex-col gap " data-controller="tabs">
+    <div class="tabs__list border" data-action="keydown.left->tabs#prev keydown.right->tabs#next" role="tablist">
+      <button id="trigger_requested"  class="btn btn--tab " data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_requested">Requested</button>
+      <button id="trigger_accepted"  class="btn btn--tab " data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_accepted">Accepted</button>
+      <button id="trigger_declined"  class="btn btn--tab " data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_declined">Declined</button>
+      <button id="trigger_blocked"  class="btn btn--tab " data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_blocked">Blocked</button>
+    </div>
+    <div>
+      <div hidden id="tab_requested_followers" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_requested", class="flex flex-col gap">
+        <%= render partial: "followings/following", collection: followings.requested %>
+      </div>
+      <div hidden id="tab_accepted_followers" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_accepted", class="flex flex-col gap">
+        <%= render partial: "followings/following", collection: followings.accepted %>
+      </div>
+      <div hidden id="tab_declined_followers" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_declined", class="flex flex-col gap">
+        <%= render partial: "followings/following", collection: followings.declined %>
+      </div>
+      <div hidden id="tab_blocked_followers" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_blocked", class="flex flex-col gap">
+        <%= render partial: "followings/following", collection: followings.blocked %>
+      </div>
+    </div>
   </div>
 </div>
