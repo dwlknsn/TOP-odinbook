@@ -1,18 +1,21 @@
-<div id="posts" class="flex flex-col gap">
+<div id="posts" class="flex flex-col gap card">
+  <div>
+    <h1 class="text-3xl">Posts</h1>
+  </div>
   <div>
     <%= link_to "Create Post", new_post_path, class: "btn btn--primary" %>
   </div>
-  <div class="flex flex-col gap bg-shadeborder-dark" data-controller="tabs">
+  <div class="flex flex-col gap " data-controller="tabs">
     <div class="tabs__list border" data-action="keydown.left->tabs#prev keydown.right->tabs#next" role="tablist">
-      <button id="trigger_followed"  class="btn btn--tab border-dark" data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_followed">My Feed</button>
-      <button id="trigger_discover" class="btn btn--tab border-dark" data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_discover">Discover</button>
+      <button id="trigger_followed"  class="btn btn--tab " data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_followed">My Feed</button>
+      <button id="trigger_discover" class="btn btn--tab " data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_discover">Discover</button>
     </div>
     <div>
       <div hidden id="tab_followed" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_followed", class="flex flex-col gap">
-        <%= render partial: "preview", collection: @my_posts, as: :post  %>
+        <%= render partial: "posts", locals: { posts: @my_posts, variant: :preview }  %>
       </div>
       <div hidden id="tab_discover" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_discover", class="flex flex-col gap">
-        <%= render partial: "preview", collection: @discoverable_posts, as: :post  %>
+        <%= render partial: "posts", locals: { posts: @discoverable_posts, variant: :preview }  %>
       </div>
     </div>
   </div>

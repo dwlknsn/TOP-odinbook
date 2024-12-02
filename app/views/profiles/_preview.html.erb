@@ -1,7 +1,7 @@
 <%= turbo_frame_tag("#{dom_id(profile)}-preview") do %>
-  <div class="flex flex-col gap card bg-main">
+  <div class="flex flex-col gap card x">
     <div class="flex gap">
-      <div class="border p-2 bg-shade rounded-full avatar",  style="--avatar-size: 100px;">
+      <div class="border p-2 rounded-full avatar",  style="--avatar-size: 100px;">
         <%= image_tag(avatar_url_for(profile.user), alt: "Avatar for #{profile.display_name}", class: "avatar rounded-full object-cover") %>
       </div>
       <div id="personal-info" class="flex flex-col gap grow pi-4">

@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(comment) do %>
   <div class="flex flex-col gap-half" data-controller="commentable">
-    <div class="card bg-main mis-8">
+    <div class="card mis-8">
       <% if comment.soft_deleted? %>
         <em class="text-subtle">
           <%= comment.body %>
@@ -8,7 +8,7 @@
       <% else %>
         <div class="flex gap items-center">
           <%= link_to(user_path(comment.author)) do %>
-            <div class="border p-2 bg-shade rounded-full avatar",  style="--avatar-size: 50px;">
+            <div class="border p-2 rounded-full avatar",  style="--avatar-size: 50px;">
               <%= image_tag(avatar_url_for(comment.author), alt: "Avatar for #{comment.author.display_name}", class: "avatar rounded-full object-cover") %>
             </div>
           <% end %>

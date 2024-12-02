@@ -1,6 +1,6 @@
 <%= turbo_frame_tag("#{dom_id(following)}-review-buttons") do %>
-  <div id="<%= dom_id(following) %>" class="flex gap grow card bg-main items-center pis-6">
-    <div class="border p-2 bg-shade rounded-full avatar",  style="--avatar-size: 50px;">
+  <div id="<%= dom_id(following) %>" class="flex gap grow card items-center pis-6">
+    <div class="border p-2 rounded-full avatar",  style="--avatar-size: 50px;">
       <%= image_tag(avatar_url_for(following.follower), alt: "Avatar for #{following.follower.display_name}", class: "avatar rounded-full object-cover") %>
     </div>
     <div class="grow pis-8"><%= following.follower.display_name %> (@<%= following.follower.username %>)</div>
