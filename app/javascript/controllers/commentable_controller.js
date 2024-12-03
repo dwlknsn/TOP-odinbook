@@ -17,8 +17,8 @@ export default class extends Controller {
   }
 
   discardComment(event) {
+    console.log("discard comment")
     event.preventDefault()
     this.resetForm()
-    this.toggle()
   }
 }

@@ -1,41 +1,39 @@
-<%= turbo_frame_tag("#{dom_id(following)}") do %>
-  <div id="<%= dom_id(following) %>" class="flex gap grow card items-center pis-6">
-    <div class="border p-2 rounded-full avatar",  style="--avatar-size: 50px;">
-      <%= image_tag(avatar_url_for(following.follower), alt: "Avatar for #{following.follower.display_name}", class: "avatar rounded-full object-cover") %>
-    </div>
-    <div class="grow pis-8"><%= following.follower.display_name %> (@<%= following.follower.username %>)</div>
-    <div>
-      <%= form_with(model: following, url: following_path(following), method: :patch) do |f| %>
-        <%= f.hidden_field :follower_id, value: following.follower.id %>
-        <%= f.hidden_field :followee_id, value: current_user.id %>
-        <%= f.hidden_field :status, value: :accepted %>
-        <%= button_tag type: :submit, disabled: following.accepted?, class: "btn btn--icon" do %>
-          <%= image_tag "icons/check.svg", size: 20, aria: { hidden: true } %>
-          <span class="sr-only">Accept follow request</span>
-        <% end %>
-      <% end %>
-    </div>
-    <div>
-      <%= form_with(model: following, url: following_path(following), method: :patch) do |f| %>
-        <%= f.hidden_field :follower_id, value: following.follower.id %>
-        <%= f.hidden_field :followee_id, value: current_user.id %>
-        <%= f.hidden_field :status, value: :declined %>
-        <%= button_tag type: :submit, disabled: following.declined?, class: "btn btn--icon" do %>
-          <%= image_tag "icons/x-mark.svg", size: 20, aria: { hidden: true } %>
-          <span class="sr-only">Decline follow request</span>
-        <% end %>
-      <% end %>
-    </div>
-    <div>
-      <%= form_with(model: following, url: following_path(following), method: :patch) do |f| %>
-        <%= f.hidden_field :follower_id, value: following.follower.id %>
-        <%= f.hidden_field :followee_id, value: current_user.id %>
-        <%= f.hidden_field :status, value: :blocked %>
-        <%= button_tag type: :submit, disabled: following.blocked?, alt: "block", class: "btn btn--icon" do %>
-          <%= image_tag "icons/no-symbol.svg", size: 20, aria: { hidden: true } %>
-          <span class="sr-only">Block follow request</span>
-        <% end %>
-      <% end %>
-    </div>
+<div id="<%= dom_id(following) %>" class="flex gap grow card items-center pis-6">
+  <div class="border p-2 rounded-full avatar",  style="--avatar-size: 50px;">
+    <%= image_tag(avatar_url_for(following.follower), alt: "Avatar for #{following.follower.display_name}", class: "avatar rounded-full object-cover") %>
   </div>
-<% end %>
+  <div class="grow pis-8"><%= following.follower.display_name %> (@<%= following.follower.username %>)</div>
+  <div>
+    <%= form_with(model: following, url: following_path(following), method: :patch) do |f| %>
+      <%= f.hidden_field :follower_id, value: following.follower.id %>
+      <%= f.hidden_field :followee_id, value: current_user.id %>
+      <%= f.hidden_field :status, value: :accepted %>
+      <%= button_tag type: :submit, disabled: following.accepted?, class: "btn btn--icon" do %>
+        <%= image_tag "icons/check.svg", size: 20, aria: { hidden: true } %>
+        <span class="sr-only">Accept follow request</span>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    <%= form_with(model: following, url: following_path(following), method: :patch) do |f| %>
+      <%= f.hidden_field :follower_id, value: following.follower.id %>
+      <%= f.hidden_field :followee_id, value: current_user.id %>
+      <%= f.hidden_field :status, value: :declined %>
+      <%= button_tag type: :submit, disabled: following.declined?, class: "btn btn--icon" do %>
+        <%= image_tag "icons/x-mark.svg", size: 20, aria: { hidden: true } %>
+        <span class="sr-only">Decline follow request</span>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    <%= form_with(model: following, url: following_path(following), method: :patch) do |f| %>
+      <%= f.hidden_field :follower_id, value: following.follower.id %>
+      <%= f.hidden_field :followee_id, value: current_user.id %>
+      <%= f.hidden_field :status, value: :blocked %>
+      <%= button_tag type: :submit, disabled: following.blocked?, alt: "block", class: "btn btn--icon" do %>
+        <%= image_tag "icons/no-symbol.svg", size: 20, aria: { hidden: true } %>
+        <span class="sr-only">Block follow request</span>
+      <% end %>
+    <% end %>
+  </div>
+</div>

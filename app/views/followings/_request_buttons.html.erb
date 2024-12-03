@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "#{dom_id(followee)}-follow-request-buttons" do %>
+<div id="<%= dom_id(followee) %>-follow-request-buttons">
   <% following = local_assigns[:following] || Following.find_by(follower: follower, followee: followee) %>
   <div>
     <% if following.present? %>
@@ -13,4 +13,4 @@
       <% end %>
     <% end %>
   </div>
-<% end %>
+</div>

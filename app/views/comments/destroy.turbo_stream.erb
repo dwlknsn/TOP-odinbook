@@ -1,5 +1,5 @@
 <% if @comment.soft_deleted? %>
-  <%= turbo_stream.replace dom_id(@comment), partial: "deleted" %>
+  <%= turbo_stream.replace(dom_id(@comment), partial: "deleted") %>
 <% else %>
-  <%= turbo_stream.remove dom_id(@comment) %>
+  <%= turbo_stream.remove(dom_id(@comment)) %>
 <% end %>
