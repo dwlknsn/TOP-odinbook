@@ -1,9 +1,1 @@
 <%= turbo_stream.replace "like-button-#{ dom_id(@like.likeable) }", partial: "button", locals: { likeable: @like.likeable } %>
-<%= turbo_stream.prepend "#{ dom_id(@like.likeable.author) }-notifications-feed", partial: "notifications/like", locals: { likeable: @like.likeable } %>
-<%= turbo_stream.append "#{ dom_id(@like.likeable.author) }-notifications-feed", html: "<p>hello</p>" %>
-<%= turbo_stream.append "notifications", html: "<p>hello</p>" %>
-<%= puts "===="%>
-<%= puts "===="%>
-<%= puts "#{dom_id(@like.likeable.author)}-notifications-feed"%>
-<%= puts "===="%>
-<%= puts "===="%>

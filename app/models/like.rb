@@ -8,7 +8,11 @@ class Like < ApplicationRecord
   validates :user_id, uniqueness: { scope: [ :likeable_id, :likeable_type ] }
   validate :user_cannot_like_own_likeable
 
-  after_create_commit ->() { broadcast_turbo_stream "#{ dom_id(likeable.author) }-notifications-feed", partial: "notifications/like", locals: { likeable: likeable } }
+  after_create_commit ->() { broadcast_prepend_to(
+                            "#{ likeable.author.dom_id }-notifications",
+                             target: "#{ likeable.author.dom_id }-notifications-feed",
+                             partial: "notifications/like",
+                             locals: { like: self }) }
 
   private
 
