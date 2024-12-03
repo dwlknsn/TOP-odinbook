@@ -1,2 +1,3 @@
 <%= turbo_stream.remove "#{dom_id(@following)}" %>
+<%# Will this prepend to all users followings feeds? %>
 <%= turbo_stream.prepend "tab_#{@following.status}_followers", partial: "following", locals: { following: @following } %>

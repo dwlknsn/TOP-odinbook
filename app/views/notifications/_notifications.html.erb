@@ -1,0 +1,10 @@
+<div id="notifications" class="flex flex-col gap card">
+  <div>
+    <h1 class="text-3xl">Notifications</h1>
+  </div>
+  <div class="flex flex-col gap">
+    <%= turbo_frame_tag("#{dom_id(profile.user)}-notifications-feed") %>
+    <div>foo</div>
+    <div>bar</div>
+  </div>
+</div>

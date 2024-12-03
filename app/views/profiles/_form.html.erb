@@ -1,5 +1,5 @@
 <%= turbo_frame_tag("#{dom_id(profile)}-preview") do %>
-  <%= form_with(model: profile, method: :patch, class: "flex flex-col gap card x") do |f| %>
+  <%= form_with(model: profile, method: :patch, class: "flex flex-col gap card) do |f| %>
     <%= render("shared/form_errors", resource: profile) %>
     <div class="flex gap">
       <div id="avatar-edit-group" class="flex flex-col gap"

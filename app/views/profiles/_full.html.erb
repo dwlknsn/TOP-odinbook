@@ -1,5 +1,6 @@
-<div id="<%= dom_id(profile) %>-full" class="flex flex-col gap card x">
+<div id="<%= dom_id(profile) %>-full" class="flex flex-col gap card>
   <%= render partial: "profiles/preview", locals: { profile: profile } %>
+  <%= render partial: "notifications/notifications", locals: { profile: profile } %>
   <%= render partial: "followings/followings", locals: { followings: followings } %>
   <%= render partial: "posts/posts", locals: { posts: profile.user.authored_posts, title: "My posts", variant: :preview }  %>
 </div>
