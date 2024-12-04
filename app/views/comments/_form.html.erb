@@ -1,4 +1,4 @@
-<div class="card flex flex-col gap mis-8 hide@sm" data-commentable-target="formContainer">
+<div class="card border-dark flex flex-col gap mis-8 hide@sm" data-commentable-target="formContainer">
   <%= form_with(model: comment, html: { contents: true },
                 data: { commentable_target: "form", action: "turbo:submit-end->commentable#resetForm" }) do |form| %>
     <% if comment.errors.any? %>
@@ -22,7 +22,7 @@
                          data: { commentable_target: "input" } %>
     </div>
     <div class="actions flex gap justify-end">
-      <%= link_to("Discard Comment", "#",
+      <%= link_to("discard Comment", "#",
                   class: "btn btn--negative",
                   data: { action: "click->commentable#discardComment" }) %>
       <%= form.submit("Add comment", class: "btn btn--primary") %>

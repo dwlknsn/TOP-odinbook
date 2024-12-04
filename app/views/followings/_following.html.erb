@@ -1,4 +1,4 @@
-<div id="<%= dom_id(following) %>" class="flex gap grow card items-center pis-6">
+<div id="<%= dom_id(following) %>" class="flex gap grow card border-dark items-center pis-6">
   <div class="border p-2 rounded-full avatar",  style="--avatar-size: 50px;">
     <%= image_tag(avatar_url_for(following.follower), alt: "Avatar for #{following.follower.display_name}", class: "avatar rounded-full object-cover") %>
   </div>

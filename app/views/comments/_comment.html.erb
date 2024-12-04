@@ -1,5 +1,5 @@
 <div id="<%= dom_id(comment) %>"class="flex flex-col gap-half" data-controller="commentable">
-  <div class="card mis-8">
+  <div class="card border-dark mis-8">
     <% if comment.soft_deleted? %>
       <em class="text-subtle">
         <%= comment.body %>

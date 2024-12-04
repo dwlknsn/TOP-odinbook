@@ -26,11 +26,6 @@ class User < ApplicationRecord
   has_many :followings_as_followee, class_name: "Following", foreign_key: :followee_id, dependent: :destroy
   has_many :followers, through: :followings_as_followee
 
-
-  def follows?(user)
-    followees.include?(User.find(user.id))
-  end
-
   private
 
   def create_basic_profile

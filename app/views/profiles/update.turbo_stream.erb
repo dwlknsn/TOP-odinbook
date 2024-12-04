@@ -1,1 +1,1 @@
-<%= turbo_stream.replace("#{dom_id(@profile)}-preview", partial: "preview", locals: { profile: @profile }) %>
+<%= turbo_stream.replace("#{dom_id(@profile)}-editable-fields", partial: "personal_details", locals: { profile: @profile }) %>

@@ -1,35 +1,11 @@
-<%= turbo_frame_tag("#{dom_id(profile)}-preview") do %>
-  <div class="flex flex-col gap card">
-    <div class="flex gap">
-      <div class="border p-2 rounded-full avatar",  style="--avatar-size: 100px;">
-        <%= image_tag(avatar_url_for(profile.user), alt: "Avatar for #{profile.display_name}", class: "avatar rounded-full object-cover") %>
-      </div>
-      <div id="personal-info" class="flex flex-col gap grow pi-4">
-        <div class="flex flex-col gap-half">
-          <label for="username">Username</label>
-          <div class="input disabled">
-            @<%= profile.username %>
-          </div>
-        </div>
-        <div class="flex flex-col gap-half">
-          <label for="display_name">Display name</label>
-          <div class="input disabled">
-            <%= profile.display_name %>
-          </div>
-        </div>
-      </div>
-    </div>
+<div id="<%= dom_id(profile) %>-preview" class="flex gap card border-dark">
+  <%= render partial: "profiles/personal_details", locals: { profile: profile } %>
+  <% if current_user != profile.user %>
     <div id="profile-buttons" class="flex gap justify-end">
       <div class="flex flex-col gap">
-        <% if current_user == profile.user %>
-          <%= link_to "Edit Profile", edit_profile_path(profile), class: "btn btn--positive grow" %>
-        <% else %>
-          <%= render partial: 'followings/request_buttons', locals: { follower: current_user, followee: profile.user } %>
-        <% end %>
-        <% if local_assigns[:preview] %>
-          <%= link_to "View full profile", user_path(profile.user), class: "btn btn--secondary grow" %>
-        <% end %>
+        <%= link_to "View posts", user_path(profile.user), class: "btn btn--primary" %>
+        <%= render partial: 'followings/request_buttons', locals: { follower: current_user, followee: profile.user } %>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

@@ -1,4 +1,4 @@
-<div id="<%= dom_id(post) %>-preview" class="card flex">
+<div id="<%= dom_id(post) %>-preview" class="card border-dark flex">
   <div class="flex flex-col gap">
     <div class="avatar border p-2 ",  style="--avatar-size: 100px;">
       <%= image_tag(avatar_url_for(post.author), alt: "Avatar", class: "avatar rounded-full object-cover") %>
