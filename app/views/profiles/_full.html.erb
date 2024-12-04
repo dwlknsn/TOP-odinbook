@@ -3,7 +3,6 @@
     <%= render partial: "profiles/personal_details", locals: { profile: profile } %>
   </div>
   <% if current_user == profile.user %>
-    <%= render partial: "notifications/notifications", locals: { profile: profile } %>
     <%= render partial: "followings/followings", locals: { followings: followings } %>
   <% end %>
   <%= render partial: "posts/posts", locals: { posts: profile.user.authored_posts, title: "Posts", variant: :preview }  %>

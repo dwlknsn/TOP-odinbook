@@ -17,7 +17,7 @@
     <%= stylesheet_link_tag :all, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="dark sidebar-layout">
+  <body class="dark double-sidebar-layout">
     <header id="header" class="">
       <div class="container">
         <h1 class="font-bold text-2xl">Odinbook</h1>
@@ -27,18 +27,23 @@
         <%= image_tag("icons/sun.svg", size: 30, class: "btn btn--icon hide@sm", aria: { hidden: true }, data: { dark_mode_target: "lightIcon", action: 'click->dark-mode#toggleTheme'}) %>
       </div>
     </header>
-    <div id="sidebar" class="">
+    <div id="sidebar-left" class="">
       <div class="container">
         <%#= yield(:sidebar) %>
         <%= render "shared/sidebar" %>
       </div>
     </div>
-    <main id="main" class="">
+    <main id="main">
       <div class="container flex flex-col gap">
         <%= link_to "Back", "#", class: "font-medium underline", data: { controller: "navigation", action: "navigation#back:prevent" } %>
         <%= render 'shared/flash_messages' %>
         <%= yield %>
       </div>
     </main>
+    <div id="sidebar-right" class="container">
+      <% if user_signed_in? %>
+        <%= render partial: "notifications/notifications", locals: { profile: current_user.profile }, class: "sticky" %>
+      <% end %>
+    </div>
   </body>
 </html>
