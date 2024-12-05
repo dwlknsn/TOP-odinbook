@@ -1,0 +1,4 @@
+<%= turbo_stream.replace :next_page_container, partial: "posts/preview", collection: @page.records, as: :post %>
+<% unless @page.last? %>
+  <%= turbo_stream.append :paginated_posts, partial: "posts/next_page_container", locals: { page: @page.next_param } %>
+<% end %>

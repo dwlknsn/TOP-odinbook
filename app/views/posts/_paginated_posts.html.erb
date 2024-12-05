@@ -1,0 +1,4 @@
+<turbo-frame id="paginated_posts" class="flex flex-col gap">
+  <%= render partial: "posts/preview", collection: @page.records, as: :post %>
+  <%= render "posts/next_page_container", page: @page.next_param unless @page.last? %>
+</turbo-frame>

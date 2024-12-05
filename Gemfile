@@ -42,9 +42,11 @@ gem "image_processing", "~> 1.2"
 
 gem "devise", "~> 4.9"
 
+# https://csszero.lazaronixon.com/lookbook/pages/overview
 gem "css-zero", "~> 0.0.70"
 
-
+# https://github.com/basecamp/geared_pagination
+gem "geared_pagination", "~> 1.2"
 
 ###################################
 ###### DEV & TEST GEMS START ######

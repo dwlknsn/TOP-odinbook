@@ -2,8 +2,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ edit update destroy ]
 
   def index
-    @my_posts = Post.includes([ :likes, author: :profile ]).followed_by(current_user).order(created_at: :desc)
-    @discoverable_posts = Post.includes([ :likes, author: :profile ]).discoverable_by(current_user).order(created_at: :desc)
+    set_page_and_extract_portion_from(
+      Post.includes([ :likes, author: :profile ])
+          .followed_by(current_user)
+          .order(created_at: :desc),
+        per_page: 5
+      )
+    # sleep 1.seconds
   end
 
   def show
