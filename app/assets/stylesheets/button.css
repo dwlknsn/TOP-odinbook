@@ -32,6 +32,11 @@
     outline-offset: var(--border-2);
   }
 
+  &:focus {
+    outline: var(--btn-outline-size, 1px) solid  var(--color-text);
+    outline-offset: var(--border-2);
+  }
+
   &:is(:disabled, [aria-disabled]) {
     opacity: var(--opacity-50);
     pointer-events: none;

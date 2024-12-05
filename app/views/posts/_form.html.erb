@@ -19,6 +19,10 @@
     <%= form.label :content %>
     <%= form.rich_textarea :content %>
   </div>
+  <div>
+    <%= form.label :status %>
+    <%= form.select :status, Post.statuses.keys.map { |k| [k.humanize, k] }, {}, class: "input" %>
+  </div>
   <div id="form-actions" class="flex gap">
     <div>
       <%= form.submit "Submit", class: "btn btn--primary" %>

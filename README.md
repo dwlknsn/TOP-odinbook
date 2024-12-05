@@ -27,17 +27,18 @@ Profile
 Posts
 
 - [x] User can author a draft post
-- [ ] User can publish a post
+- [x] User can publish a post
 - [x] User can edit a post
 - [x] Make posts rich text with ActionText/Trix
 - [x] User can add pictures to a post
-- [ ] User can archive a post
+- [x] User can archive a post
 - [x] User can view posts in a feed in preview format
 - [x] User can view full posts with comments
 - [ ] Separate public and private posts
-- [ ] pagination on posts
-- [ ] infinite scroll on posts
+- [ ] ~pagination on posts~
+- [x] infinite scroll on posts
 - [x] Split Posts feed into followed users' posts and discoverable (i.e. unfollowed users') posts
+- [ ] User can schedule a post to be published at a future date
 
 Likes
 

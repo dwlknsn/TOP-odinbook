@@ -29,14 +29,17 @@ end
 puts
 puts "Creating posts"
 User.all.each do |user|
-  10.times do
-  print "."
-    user.authored_posts.create!(
-      title: Faker::Lorem.sentence(word_count: 5),
-      content: Faker::Lorem.paragraphs(number: 3).join("\n\n"),
+  5.times do
+    Post.statuses.keys.each do |status|
+      print "."
+      user.authored_posts.create!(
+        title: Faker::Lorem.sentence(word_count: 5),
+        content: Faker::Lorem.paragraphs(number: 3).join("\n\n"),
+        status: status
       )
     end
   end
+end
 
 puts
 puts "Creating comments, likes, and follows"

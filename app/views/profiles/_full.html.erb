@@ -4,6 +4,8 @@
   </div>
   <% if current_user == profile.user %>
     <%= render partial: "followings/followings", locals: { followings: followings } %>
+    <%= render partial: "posts/posts", locals: { posts: profile.user.authored_posts, title: "Posts", variant: :preview }  %>
+  <% else %>
+    <%= render partial: "posts/posts", locals: { posts: profile.user.authored_posts.published, title: "Posts", variant: :preview }  %>
   <% end %>
-  <%= render partial: "posts/posts", locals: { posts: profile.user.authored_posts, title: "Posts", variant: :preview }  %>
 </div>
