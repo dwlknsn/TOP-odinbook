@@ -69,6 +69,7 @@ Following Users
 - [x] User can accept/decline a follow request
 - [x] User can block another user (i.e. other user cannot see the blocking user's posts)
 - [ ] User can mute another user (i.e. remove their posts from all feeds)
+- [ ] update users page to separate following accepted from pending
 
 Notifications
 

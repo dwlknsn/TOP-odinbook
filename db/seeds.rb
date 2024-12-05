@@ -48,7 +48,7 @@ User.all.each do |user|
 
   posts.each do |post|
     print "."
-    post.comments.create(author: user, body: Faker::Movies::PrincessBride.quote)
+    post.comments.create(top_level_post: post, author: user, body: Faker::Movies::PrincessBride.quote)
     post.likes.create(user: user)
   end
 
@@ -60,6 +60,6 @@ end
 User.all.each do |user|
   Comment.where.not(author: user).sample(5).each do |comment|
     print "."
-    comment.comments.create(author: user, body: Faker::Movies::Lebowski.quote)
+    comment.comments.create(top_level_post: comment.top_level_post, author: user, body: Faker::Movies::Lebowski.quote)
   end
 end

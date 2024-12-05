@@ -1,3 +1,3 @@
-<div id="<% dom_id(like) %>">
-  <%= like.user.display_name%> <%= link_to("Liked your #{like.likeable_type}", post_path(like.likeable)) %>
+<div id="<%= dom_id(like) %>-notification" style="animation: var(--animate-slide-in-left) forwards;">
+  <%= link_to("#{like.user.display_name} Liked your #{like.likeable_type}", post_path(local_assigns[:post])) %>
 </div>

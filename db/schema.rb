@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_30_092229) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_05_121412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -60,8 +60,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_30_092229) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "top_level_post_id", null: false
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
+    t.index ["top_level_post_id"], name: "index_comments_on_top_level_post_id"
   end
 
   create_table "followings", force: :cascade do |t|
@@ -120,6 +122,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_30_092229) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "posts", column: "top_level_post_id"
   add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "followings", "users", column: "followee_id"
   add_foreign_key "followings", "users", column: "follower_id"
