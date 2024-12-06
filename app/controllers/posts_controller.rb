@@ -8,7 +8,12 @@ class PostsController < ApplicationController
           .order(created_at: :desc),
         per_page: 5
       )
-    # sleep 1.seconds
+      if @page.first?
+        render formats: :html
+      else
+        render formats: :turbo_stream
+      end
+    sleep 0.5.seconds # Just to demonstrate infinite scroll loading state
   end
 
   def show
@@ -54,6 +59,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.expect(post: [ :title, :content ])
+      params.expect(post: [ :title, :content, :status ])
     end
 end
