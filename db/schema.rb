@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_05_121412) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_06_031215) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -95,6 +95,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_05_121412) do
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "all_comments_count", default: 0, null: false
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 

@@ -41,14 +41,26 @@ User.all.each do |user|
   end
 end
 
+movies = [
+  Faker::Movies::PrincessBride,
+  Faker::Movies::Lebowski,
+  Faker::Movies::BackToTheFuture,
+  Faker::Movies::Ghostbusters,
+  Faker::Movies::Hobbit,
+  Faker::Movies::HarryPotter,
+  Faker::Movies::LordOfTheRings,
+  Faker::Movies::StarWars,
+  Faker::Movies::Departed
+]
+
 puts
 puts "Creating comments, likes, and follows"
 User.all.each do |user|
-  posts = Post.where.not(author: user).sample(10)
+  posts = Post.published.where.not(author: user).sample(20)
 
   posts.each do |post|
     print "."
-    post.comments.create(top_level_post: post, author: user, body: Faker::Movies::PrincessBride.quote)
+    post.comments.create(top_level_post: post, author: user, body: movies.sample.send(:quote))
     post.likes.create(user: user)
   end
 
@@ -58,8 +70,8 @@ User.all.each do |user|
 end
 
 User.all.each do |user|
-  Comment.where.not(author: user).sample(5).each do |comment|
+  Comment.where.not(author: user).sample(20).each do |comment|
     print "."
-    comment.comments.create(top_level_post: comment.top_level_post, author: user, body: Faker::Movies::Lebowski.quote)
+    comment.comments.create(top_level_post: comment.top_level_post, author: user, body: movies.sample.send(:quote))
   end
 end

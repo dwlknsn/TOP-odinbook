@@ -17,8 +17,14 @@
     <div class="text-end text-subtle text-sm">
       <em>-- <%= post.author.display_name %> (@<%= post.author.username %> )</em>
     </div>
-    <div>
-      <%= link_to "Show full post", post, target: "_top" %>
+    <div class="flex justify-between items-end">
+      <div>
+        <%= link_to "Show full post", post, target: "_top" %>
+      </div>
+      <div class="flex gap">
+        <%= render partial: "comments/count", locals: { count: post.all_comments_count } %>
+        <%= render partial: "likes/count", locals: { count: post.likes.count } %>
+      </div>
     </div>
   </div>
 </div>

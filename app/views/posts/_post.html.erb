@@ -17,7 +17,7 @@
     <div class="text-end text-subtle text-sm">
       <em>-- <%= post.author.display_name %> (@<%= post.author.username %> )</em>
     </div>
-    <div id="actions" class="flex gap justify-end">
+    <div id="actions" class="flex gap justify-end items-bottom">
       <% if current_user.id == post.author_id %>
         <div>
           <%= link_to "Edit this post", edit_post_path(post), class: "btn btn--secondary"  %>
@@ -26,7 +26,7 @@
           <%= link_to "Destroy this post", post, class: "btn btn--negative", data: { turbo_method: :delete }  %>
         </div>
       <% else %>
-        <%= render 'likes/button', likeable: post %>
+        <%= render partial: 'likes/button', locals: { likeable: post, post_id: post.id } %>
       <% end %>
       <%= render 'comments/reply' %>
     </div>

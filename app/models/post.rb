@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: "User", foreign_key: :author_id, inverse_of: :authored_posts
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :all_comments, class_name: "Comment", foreign_key: "top_level_post_id", inverse_of: :top_level_post
   has_rich_text :content
 
   enum :status, {

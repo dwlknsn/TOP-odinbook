@@ -28,7 +28,7 @@
             <%= link_to "Delete", comment_path(comment), data: { turbo_method: :delete } %>
           </div>
         <% else %>
-          <%= render 'likes/button', likeable: comment %>
+          <%= render partial: 'likes/button', locals: { likeable: comment, post_id: comment.top_level_post_id } %>
         <% end %>
         <%= render 'comments/reply' %>
       </div>

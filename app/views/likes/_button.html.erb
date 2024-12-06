@@ -1,11 +1,12 @@
 <%= turbo_frame_tag "like-button-#{dom_id(likeable)}" do %>
-  <div class="flex gap items-center">
-    <div><%= likeable.likes.count %></div>
+  <div class="flex gap-half items-center">
+    <div class="text-sm"><%= likeable.likes.count %></div>
     <% like = current_user.likes.find_by(likeable: likeable) %>
     <% if like.present? %>
       <%= form_with(model: like, url: like_path(like), method: :delete) do |f| %>
         <%= f.hidden_field :likeable_id, value: likeable.id %>
         <%= f.hidden_field :likeable_type, value: likeable.class.name %>
+        <%= f.hidden_field :top_level_post_id, value: local_assigns[:post_id] %>
         <%= button_tag type: :submit, class: "btn btn--icon btn--secondary" do %>
           <%= image_tag "icons/heart-solid.svg", size: 20, aria: { hidden: true } %>
           <span class="sr-only">Remove like from <%= likeable.class.name %></span>
