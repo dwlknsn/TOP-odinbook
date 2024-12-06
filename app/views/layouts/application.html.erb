@@ -27,8 +27,8 @@
         <%= image_tag("icons/sun.svg", size: 30, class: "btn btn--icon hide@sm", aria: { hidden: true }, data: { dark_mode_target: "lightIcon", action: 'click->dark-mode#toggleTheme'}) %>
       </div>
     </header>
-    <div id="sidebar-left" class="">
-      <div class="container">
+    <div id="sidebar-left">
+      <div class="grow container flex flex-col">
         <%#= yield(:sidebar) %>
         <%= render "shared/sidebar" %>
       </div>
