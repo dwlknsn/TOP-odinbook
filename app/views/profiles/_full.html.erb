@@ -1,6 +1,11 @@
 <div id="<%= dom_id(profile) %>-full" class="flex flex-col gap">
   <div class="card border-dark">
     <%= render partial: "profiles/personal_details", locals: { profile: profile } %>
+    <% if current_user != profile.user %>
+      <div class="flex gap justify-end">
+        <%= render partial: 'followings/request_buttons', locals: { follower: current_user, followee: profile.user } %>
+      </div>
+    <% end %>
   </div>
   <% if current_user == profile.user %>
     <%= render partial: "followings/followings", locals: { followings: followings } %>

@@ -1,16 +1,26 @@
-<div id="<%= dom_id(followee) %>-follow-request-buttons">
-  <% following = local_assigns[:following] || Following.find_by(follower: follower, followee: followee) %>
-  <div>
-    <% if following.present? %>
-      <%= form_with(model: following, url: following_path(following), method: :delete) do |f| %>
-        <%= f.submit "Cancel follow request", class: "btn btn--negative" %>
+<% following = local_assigns[:following] || Following.find_by(follower: follower, followee: followee) %>
+<% if following.present? %>
+  <% if following.declined? || following.blocked? %>
+    <%# DO NOTHING %>
+  <% else %>
+    <div id="<%= dom_id(followee) %>-follow-request-buttons">
+      <% if following.requested? %>
+        <%= form_with(model: following, url: following_path(following), method: :delete) do |f| %>
+          <%= f.submit "Cancel follow request", class: "btn btn--negative" %>
+        <% end %>
+      <% elsif following.accepted? %>
+        <%= form_with(model: following, url: following_path(following), method: :delete) do |f| %>
+          <%= f.submit "Unfollow", class: "btn btn--negative" %>
+        <% end %>
       <% end %>
-    <% else %>
-      <%= form_with(model: Following.new, url: followings_path, method: :post) do |f| %>
-        <%= f.hidden_field :followee_id, value: followee.id %>
-        <%= f.hidden_field :status, value: :requested %>
-        <%= f.submit "Request to Follow", class: "btn btn--positive" %>
-      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <div id="<%= dom_id(followee) %>-follow-request-buttons">
+    <%= form_with(model: Following.new, url: followings_path, method: :post) do |f| %>
+      <%= f.hidden_field :followee_id, value: followee.id %>
+      <%= f.hidden_field :status, value: :requested %>
+      <%= f.submit "Request to Follow", class: "btn btn--positive" %>
     <% end %>
   </div>
-</div>
+<% end %>

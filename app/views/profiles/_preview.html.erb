@@ -4,7 +4,6 @@
     <div id="profile-buttons" class="flex gap justify-end">
       <div class="flex flex-col gap">
         <%= link_to "View posts", user_path(profile.user), class: "btn btn--primary" %>
-        <%= render partial: 'followings/request_buttons', locals: { follower: current_user, followee: profile.user } %>
       </div>
     </div>
   <% end %>
