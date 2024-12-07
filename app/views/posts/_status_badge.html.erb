@@ -1,0 +1,12 @@
+<% if current_user == post.author %>
+  <% if post.draft?  %>
+    <% klass = "badge--secondary" %>
+  <% elsif  post.published? %>
+    <% klass = "badge--positive" %>
+  <% else %>
+    <% klass = "badge--negative" %>
+  <% end %>
+  <div class="badge <%= klass %>">
+    <%= post.status %>
+  </div>
+<% end %>

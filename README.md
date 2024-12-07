@@ -33,9 +33,10 @@ Posts
 - [x] User can add pictures to a post
 - [x] User can archive a post
 - [x] User can view posts in a feed in preview format
-- [x] User can view full posts with comments
+- [x] User can view a full post with its comments
+- [ ] Separate feeds for followed posts and discoverable posts
 - [ ] Separate public and private posts
-- [ ] ~pagination on posts~
+- [ ] ~pagination on posts#index~ removed in favour of infinite scroll
 - [x] infinite scroll on posts
 - [x] Split Posts feed into followed users' posts and discoverable (i.e. unfollowed users') posts
 - [ ] User can schedule a post to be published at a future date
@@ -47,15 +48,15 @@ Likes
 - [ ] Add counter-cache for likes
 - [x] User can remove like from a post
 - [x] User can like a comment
-- [ ] Display likes count for comment
+- [ ] Display likes count for a comment
 - [x] User can remove like from a comment
 
 Comments
 
 - [x] User can comment on a post
 - [x] User can comment on a comment
-- [ ] Display comment count for a post (include all sub-comments)
-- [ ] Add counter-cache for comments
+- [x] Display comment count for a post (include all sub-comments)
+- [x] Add counter-cache for comments
 - [x] User can remove own comment from a post
 - [x] Comments with sub-comments are soft deleted. Sub-comments remain visible
 - [x] User can remove own comment from a comment

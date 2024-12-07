@@ -17,4 +17,12 @@ class Post < ApplicationRecord
 
   scope :followed_by, ->(user) { where(author_id: user.followee_ids << user.id) }
   scope :discoverable_by, ->(user) { where.not(author_id: user.followee_ids).where.not(author_id: user.id) }
+
+  before_commit :set_published_at_when_publishing
+
+  private
+
+  def set_published_at_when_publishing
+    self.published_at = Time.current if status_changed? && status == "published"
+  end
 end

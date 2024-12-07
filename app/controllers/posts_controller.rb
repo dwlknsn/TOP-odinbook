@@ -3,17 +3,18 @@ class PostsController < ApplicationController
 
   def index
     set_page_and_extract_portion_from(
-      Post.includes([ :likes, author: :profile ])
+      Post.published.includes([ :likes, author: :profile ])
           .followed_by(current_user)
           .order(created_at: :desc),
         per_page: 5
       )
-      if @page.first?
-        render formats: :html
-      else
-        render formats: :turbo_stream
-      end
-    sleep 0.5.seconds # Just to demonstrate infinite scroll loading state
+
+    if @page.first?
+      render formats: :html
+    else
+      render formats: :turbo_stream
+      sleep 0.5.seconds # Just to demonstrate infinite scroll loading state
+    end
   end
 
   def show
