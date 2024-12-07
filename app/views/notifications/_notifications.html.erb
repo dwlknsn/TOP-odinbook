@@ -1,4 +1,4 @@
-<%= turbo_stream_from("#{dom_id(profile.user)}-notifications") %>
+<%= turbo_stream_from(profile.user, :notifications) %>
 <div id="notifications" class="flex flex-col gap">
   <h1 class="text-3xl">Notifications</h1>
   <div id="<%= dom_id(profile.user) %>-notifications-feed" class="flex flex-col gap">

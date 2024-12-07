@@ -19,10 +19,11 @@ class Like < ApplicationRecord
 
   def update_likeable_owner_notifications
     post = likeable_type == Post.name ? likeable : likeable.top_level_post
+    target_dom_element = "#{ likeable.author.dom_id }-notifications-feed"
 
-    broadcast_prepend_to(
-      "#{ likeable.author.dom_id }-notifications",
-      target: "#{ likeable.author.dom_id }-notifications-feed",
+    broadcast_append_to(
+      [ likeable.author, :notifications ],
+      target: target_dom_element,
       partial: "notifications/like",
       locals: { like: self, post: post }
     )
