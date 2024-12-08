@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "static/dev_console"
   devise_for :users # Leave this line first.
 
   resources :posts
