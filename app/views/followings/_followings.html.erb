@@ -4,10 +4,10 @@
   </div>
   <div class="flex flex-col gap " data-controller="tabs">
     <div class="tabs__list border" data-action="keydown.left->tabs#prev keydown.right->tabs#next" role="tablist">
-      <button id="trigger_requested"  class="btn btn--tab " data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_requested">Requested</button>
-      <button id="trigger_accepted"  class="btn btn--tab " data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_accepted">Accepted</button>
-      <button id="trigger_declined"  class="btn btn--tab " data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_declined">Declined</button>
-      <button id="trigger_blocked"  class="btn btn--tab " data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_blocked">Blocked</button>
+      <button id="trigger_requested"  class="btn btn--tab" data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_requested">Requested</button>
+      <button id="trigger_accepted"  class="btn btn--tab" data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_accepted">Accepted</button>
+      <button id="trigger_declined"  class="btn btn--tab" data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_declined">Declined</button>
+      <button id="trigger_blocked"  class="btn btn--tab" data-tabs-target="button" data-action="tabs#select" role="tab" aria-controls="tab_blocked">Blocked</button>
     </div>
     <div>
       <div hidden id="tab_requested_followers" data-tabs-target="tab" role="tabpanel" tabindex="0" aria-labelledby="trigger_requested", class="flex flex-col gap">
