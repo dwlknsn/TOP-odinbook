@@ -1,7 +1,7 @@
 <%= turbo_frame_tag("#{dom_id(profile)}-editable-fields") do %>
   <div id="<%= dom_id(profile) %>-personal-details" class="flex flex-col gap grow">
     <div class="flex gap grow">
-      <div id="<%= dom_id(profile) %>-avatar" class="avatar rounded-full bg-shade border border-dark p-2",  style="--avatar-size: 100px;">
+      <div id="<%= dom_id(profile) %>-avatar" class="avatar rounded-full bg-shade border border p-2",  style="--avatar-size: 100px;">
         <%= image_tag(avatar_url_for(profile.user), alt: "Avatar for #{profile.display_name}", class: "avatar rounded-full object-cover") %>
       </div>
       <div id="<%= dom_id(profile) %>-personal-info" class="flex flex-col gap grow pi-4">

@@ -1,4 +1,4 @@
-<div id="<%= dom_id(profile) %>-preview" class="flex gap card border-dark">
+<div id="<%= dom_id(profile) %>-preview" class="flex gap card border">
   <%= render partial: "profiles/personal_details", locals: { profile: profile } %>
   <% if current_user != profile.user %>
     <div id="profile-buttons" class="flex gap justify-end">

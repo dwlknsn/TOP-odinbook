@@ -10,13 +10,13 @@
                       data: { upload_preview_target: "image" }) %>
         </div>
         <div id="avatar-edit-buttons" class="flex gap">
-          <%= f.label(:avatar, "Avatar Preview", class: "btn btn--icon btn--secondary border-dark") do %>
+          <%= f.label(:avatar, "Avatar Preview", class: "btn btn--icon btn--secondary border") do %>
             <%= f.file_field(:avatar, class: "sr-only", accept: "image/*",
                            data: { upload_preview_target: "input", action: "upload-preview#previewImage" }) %>
             <%= image_tag("icons/camera.svg", aria: { hidden: true }) %>
             <span class="sr-only">Upload avatar</span>
           <% end %>
-          <%= f.label(nil, "Remove Avatar", class: "btn btn--icon btn--negative border-dark",
+          <%= f.label(nil, "Remove Avatar", class: "btn btn--icon btn--negative border",
                     data: {action: "click->upload-preview#clear"}) do %>
             <%= f.hidden_field(:remove_avatar, value: false,
                              data: { upload_preview_target: "removeInput" }) %>
