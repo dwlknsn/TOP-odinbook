@@ -48,6 +48,11 @@ gem "css-zero", "~> 0.0.70"
 # https://github.com/basecamp/geared_pagination
 gem "geared_pagination", "~> 1.2"
 
+# https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview
+# https://github.com/omniauth/omniauth-github
+gem "omniauth-github", "~> 2.0"
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
 ###################################
 ###### DEV & TEST GEMS START ######
 ###################################

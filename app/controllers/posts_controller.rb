@@ -41,9 +41,9 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-        redirect_to @post, notice: "Post was successfully updated."
+      redirect_to @post, notice: "Post was successfully updated."
     else
-        render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 

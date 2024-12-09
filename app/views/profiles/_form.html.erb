@@ -1,48 +1,50 @@
-<%= turbo_frame_tag("#{dom_id(profile)}-editable-fields") do %>
-  <%= form_with(model: profile, method: :patch, class: "flex flex-col gap grow") do |f| %>
-    <%= render("shared/form_errors", resource: profile) %>
-    <div class="flex gap">
-      <div id="avatar-edit-group" class="flex flex-col gap"
-             data-controller="upload-preview",
-             data-upload-preview-default-image-value="<%= asset_url("default-picture.webp") %>">
-        <div id="avatar-preview" class="border p-2 rounded-full avatar",  style="--avatar-size: 100px;">
-          <%= image_tag(avatar_url_for(profile.user), size: 100, alt: "Avatar", class: "avatar rounded-full object-cover",
+<%= form_with(model: profile, class: "flex flex-col gap grow") do |f| %>
+  <%= render("shared/form_errors", resource: profile) %>
+  <div class="flex gap items-center">
+    <div id="avatar-edit-group" class="flex flex-col gap"
+      data-controller="upload-preview",
+      data-upload-preview-default-image-value="<%= asset_url("default-picture.webp") %>">
+      <div id="avatar-preview" class="border p-2 rounded-full avatar",  style="--avatar-size: 200px;">
+        <%= image_tag(avatar_url_for(profile.user), size: 200, alt: "Avatar", class: "avatar rounded-full object-cover",
                       data: { upload_preview_target: "image" }) %>
-        </div>
-        <div id="avatar-edit-buttons" class="flex gap">
-          <%= f.label(:avatar, "Avatar Preview", class: "btn btn--icon btn--secondary border") do %>
-            <%= f.file_field(:avatar, class: "sr-only", accept: "image/*",
+      </div>
+      <div id="avatar-edit-buttons" class="flex gap justify-center">
+        <%= f.label(:avatar, "Avatar Preview", class: "btn btn--icon btn--secondary border-dark") do %>
+          <%= f.file_field(:avatar, class: "sr-only", accept: "image/*",
                            data: { upload_preview_target: "input", action: "upload-preview#previewImage" }) %>
-            <%= image_tag("icons/camera.svg", aria: { hidden: true }) %>
-            <span class="sr-only">Upload avatar</span>
-          <% end %>
-          <%= f.label(nil, "Remove Avatar", class: "btn btn--icon btn--negative border",
+          <%= image_tag("icons/camera.svg", aria: { hidden: true }) %>
+          <span class="sr-only">Upload avatar</span>
+        <% end %>
+        <%= f.label(nil, "Remove Avatar", class: "btn btn--icon btn--negative border-dark",
                     data: {action: "click->upload-preview#clear"}) do %>
-            <%= f.hidden_field(:remove_avatar, value: false,
+          <%= f.hidden_field(:remove_avatar, value: false,
                              data: { upload_preview_target: "removeInput" }) %>
-            <%= image_tag "icons/minus.svg", aria: { hidden: true } %>
-            <span class="sr-only">Remove avatar</span>
-          <% end %>
-        </div>
-      </div>
-      <div id="personal-info" class="flex flex-col gap grow pi-4">
-        <div class="flex flex-col gap-half">
-          <%= f.label :username %>
-          <%= f.text_field :username, disabled: true, class: "input" %>
-        </div>
-        <div class="flex flex-col gap-half">
-          <%= f.label :display_name %>
-          <%= f.text_field :display_name, class: "input" %>
-        </div>
+          <%= image_tag "icons/minus.svg", aria: { hidden: true } %>
+          <span class="sr-only">Remove avatar</span>
+        <% end %>
       </div>
     </div>
-    <div id="edit-profile-form-buttons" class="flex gap justify-end">
-      <div>
-        <%= link_to("discard changes", profile_path, class: "btn btn--negative") %>
+    <div id="personal-info" class="flex flex-col gap grow pi-4">
+      <div class="flex flex-col gap-half">
+        <%= f.label :display_name %>
+        <%= f.text_field :display_name, class: "input" %>
       </div>
-      <div>
-        <%= f.submit("Update Profile", class: "btn btn--positive") %>
+      <div class="flex flex-col gap-half">
+        <%= f.label :username %>
+        <%= f.text_field :username, disabled: local_assigns[:initial_creation] != "true", class: "input" %>
+      </div>
+      <div class="flex flex-col gap-half">
+        <%= f.label :email %>
+        <%= f.text_field :email, value: profile.user.email, disabled: true, class: "input" %>
       </div>
     </div>
-  <% end %>
+  </div>
+  <div id="edit-profile-form-buttons" class="flex gap justify-end">
+    <div>
+      <%= link_to("discard changes", profile_path, class: "btn btn--negative") %>
+    </div>
+    <div>
+      <%= f.submit class: "btn btn--positive" %>
+    </div>
+  </div>
 <% end %>

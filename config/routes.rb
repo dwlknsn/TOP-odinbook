@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get "static/dev_console"
-  devise_for :users # Leave this line first.
+  # Leave this devise line first, so that it is registered before the user resources.
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  delete "omniauth_logins/:id", to: "omniauth_logins#destroy", as: "omniauth_logins"
 
   resources :posts
   resources :comments, only: [ :create, :update, :destroy ]
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
     delete :unfollow, to: "followings#destroy", as: "unfollow"
   end
   resources :followings
+
+  get "static/dev_console"
 
   root "posts#index"
 

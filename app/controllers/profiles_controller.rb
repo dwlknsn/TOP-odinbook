@@ -1,8 +1,25 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile
+  before_action :set_profile, only: [ :show, :edit, :update ]
 
   def show
     @followings = @profile.user.followings_as_followee.includes(follower: :profile).order(:id)
+  end
+
+  def new
+    redirect_to profile_path if current_user.profile.present?
+    @profile ||= Profile.new
+  end
+
+  def create
+    @profile = current_user.build_profile(profile_params)
+
+    respond_to do |format|
+      if @profile.save!
+        format.html { redirect_to root_path, notice: "Profile was successfully created." }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit

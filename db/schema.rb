@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_06_031215) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_09_042210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -88,6 +88,19 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_06_031215) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "omniauth_logins", force: :cascade do |t|
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider"], name: "index_omniauth_logins_on_provider"
+    t.index ["uid", "provider"], name: "index_uid_provider_uniqueness", unique: true
+    t.index ["uid"], name: "index_omniauth_logins_on_uid"
+    t.index ["user_id", "provider"], name: "index_user_id_provider_uniqueness", unique: true
+    t.index ["user_id"], name: "index_omniauth_logins_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.bigint "author_id", null: false
     t.string "title", null: false
@@ -128,6 +141,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_06_031215) do
   add_foreign_key "followings", "users", column: "followee_id"
   add_foreign_key "followings", "users", column: "follower_id"
   add_foreign_key "likes", "users"
+  add_foreign_key "omniauth_logins", "users"
   add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "profiles", "users"
 end

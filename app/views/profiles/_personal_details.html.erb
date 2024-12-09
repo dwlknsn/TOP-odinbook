@@ -1,22 +1,43 @@
 <%= turbo_frame_tag("#{dom_id(profile)}-editable-fields") do %>
   <div id="<%= dom_id(profile) %>-personal-details" class="flex flex-col gap grow">
     <div class="flex gap grow">
-      <div id="<%= dom_id(profile) %>-avatar" class="avatar rounded-full bg-shade border border p-2",  style="--avatar-size: 100px;">
-        <%= image_tag(avatar_url_for(profile.user), alt: "Avatar for #{profile.display_name}", class: "avatar rounded-full object-cover") %>
+      <div id="<%= dom_id(profile) %>-avatar" class="avatar rounded-full bg-shade border p-2",  style="--avatar-size: 200px;">
+        <%= image_tag(avatar_url_for(profile.user), soze: 200, alt: "Avatar for #{profile.display_name}", class: "avatar rounded-full object-cover") %>
       </div>
       <div id="<%= dom_id(profile) %>-personal-info" class="flex flex-col gap grow pi-4">
-        <div class="flex flex-col gap-half">
-          <label for="username">Username</label>
-          <div class="input disabled">
-            @<%= profile.username %>
-          </div>
-        </div>
         <div class="flex flex-col gap-half">
           <label for="display_name">Display name</label>
           <div class="input disabled">
             <%= profile.display_name %>
           </div>
         </div>
+        <div class="flex flex-col gap-half">
+          <label for="username">Username</label>
+          <div class="input disabled">
+            @<%= profile.username %>
+          </div>
+        </div>
+        <% if current_user == profile.user %>
+          <div class="flex flex-col gap-half">
+            <label for="email">Email</label>
+            <div class="input disabled">
+              <%= profile.user.email %>
+            </div>
+          </div>
+          <div class="flex flex-col gap-half">
+            <label for="omniauth_logins">Linked Social Logins</label>
+            <div class="flex gap items-center">
+              <% if profile.user.omniauth_logins.any? %>
+                <% profile.user.omniauth_logins.each do |login| %>
+                  <div class="mi-8"><%= login.provider.titleize %></div>
+                  <%= button_to("Disconnect", omniauth_logins_path(login), method: :delete, format: :html, class: "btn btn--negative") %>
+                <% end %>
+              <% else %>
+                <li>None</li>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
     <% if current_user == profile.user %>

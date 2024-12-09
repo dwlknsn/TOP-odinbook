@@ -1,5 +1,5 @@
 <div id="<%= dom_id(profile) %>-full" class="flex flex-col gap">
-  <div class="card border">
+  <div class="card border flex flex-col gap">
     <%= render partial: "profiles/personal_details", locals: { profile: profile } %>
     <% if current_user != profile.user %>
       <div class="flex gap justify-end">
@@ -9,7 +9,7 @@
   </div>
   <% if current_user == profile.user %>
     <%= render partial: "followings/followings", locals: { followings: followings } %>
-    <%= render partial: "posts/tabbed_posts", locals: { posts: profile.user.authored_posts, title: "Posts", variant: :preview }  %>
+    <%= render partial: "posts/tabbed_posts", locals: { posts: profile.user.authored_posts, title: "My Posts", variant: :preview }  %>
   <% else %>
     <%= render partial: "posts/posts", locals: { posts: profile.user.authored_posts.published, title: "Posts", variant: :preview }  %>
   <% end %>

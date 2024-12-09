@@ -1,14 +1,13 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable
+  # :confirmable, :lockable, :timeoutable, :trackable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  devise :omniauthable, omniauth_providers: %i[github]
 
+  has_many :omniauth_logins, dependent: :destroy
 
   has_one :profile, dependent: :destroy
   delegate :username, :display_name, :avatar, to: :profile
-
-  after_create :create_basic_profile
 
   has_many :authored_posts, class_name: "Post", inverse_of: :author, dependent: :destroy
 
@@ -26,14 +25,45 @@ class User < ApplicationRecord
   has_many :followings_as_followee, class_name: "Following", foreign_key: :followee_id, dependent: :destroy
   has_many :followers, through: :followings_as_followee
 
+
+  def self.from_omniauth(auth)
+    login = OmniauthLogin.find_or_create_by(provider: auth.provider, uid: auth.uid)
+    user = login.user || User.find_by(email: auth.info.email.downcase)
+
+    if user.nil?
+      user = User.new
+      if auth.info.email.present?
+        user.email = auth.info.email
+        user.password = Devise.friendly_token
+      end
+      user.omniauth_logins << login
+      user.save!
+    else
+      user.omniauth_logins << login
+    end
+
+    user
+
+    # If you are using confirmable and the provider(s) you use validate emails,
+    # uncomment the line below to skip the confirmation emails.
+    # user.skip_confirmation!
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.github_data"] && session["devise.github_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+
   private
 
-  def create_basic_profile
-    sanitized_email = email.split("@").first.gsub(/\W/, "").downcase
+  def email_required?
+    super && omniauth_logins.none?
+  end
 
-    create_profile!(
-      username: sanitized_email,
-      display_name: sanitized_email
-    )
+  def password_required?
+    super && omniauth_logins.none?
   end
 end
