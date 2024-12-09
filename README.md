@@ -14,7 +14,7 @@ Deployment
 Registration
 
 - [x] User can create an account (Devise - email/password)
-- [ ] User can create an account (OAuth)
+- [x] User can create an account (OAuth)
 - [ ] Welcome email (Sendgrid?)
 
 Profile
@@ -70,7 +70,7 @@ Following Users
 - [x] User can accept/decline a follow request
 - [x] User can block another user (i.e. other user cannot see the blocking user's posts)
 - [ ] User can mute another user (i.e. remove their posts from all feeds)
-- [ ] update users page to separate following accepted from pending
+- [x] update users page to separate following accepted from pending
 
 Notifications
 
