@@ -25,7 +25,6 @@ class User < ApplicationRecord
   has_many :followings_as_followee, class_name: "Following", foreign_key: :followee_id, dependent: :destroy
   has_many :followers, through: :followings_as_followee
 
-
   def self.from_omniauth(auth)
     login = OmniauthLogin.find_or_create_by(provider: auth.provider, uid: auth.uid)
     user = login.user || User.find_by(email: auth.info.email.downcase)

@@ -20,9 +20,9 @@ puts "Creating users"
     password_confirmation: "password"
   )
 
-  u.profile.update!(
+  u.create_profile!(
     username: name,
-    display_name: Faker::Name.name
+    display_name: "#{name}-#{Faker::Name.name}"
   )
 end
 

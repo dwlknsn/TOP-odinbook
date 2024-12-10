@@ -76,6 +76,9 @@ group :development do
 
   # https://github.com/railsjazz/rails_live_reload
   gem "rails_live_reload", "~> 0.3.6"
+
+  # https://github.com/ryanb/letter_opener
+  gem "letter_opener", "~> 1.10"
 end
 
 group :test do

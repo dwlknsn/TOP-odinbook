@@ -15,6 +15,7 @@ Registration
 
 - [x] User can create an account (Devise - email/password)
 - [x] User can create an account (OAuth)
+- [x] Welcome email (letter_opener)
 - [ ] Welcome email (Sendgrid?)
 
 Profile

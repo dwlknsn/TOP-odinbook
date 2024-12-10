@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
 
   def new
     redirect_to profile_path if current_user.profile.present?
-    @profile ||= Profile.new
+    @profile ||= current_user.build_profile
   end
 
   def create
