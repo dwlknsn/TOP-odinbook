@@ -41,6 +41,8 @@ User.all.each do |user|
   end
 end
 
+puts
+puts "Creating comments, likes, and follows"
 movies = [
   Faker::Movies::PrincessBride,
   Faker::Movies::Lebowski,
@@ -53,8 +55,6 @@ movies = [
   Faker::Movies::Departed
 ]
 
-puts
-puts "Creating comments, likes, and follows"
 User.all.each do |user|
   posts = Post.published.where.not(author: user).sample(20)
 
@@ -64,8 +64,8 @@ User.all.each do |user|
     post.likes.create(user: user)
   end
 
-  User.where.not(id: user.id).sample(2).each do |author|
-    author.followers << user
+  User.where.not(id: user.id).sample(3).each do |followee|
+    followee.followers << user
   end
 end
 
@@ -74,4 +74,6 @@ User.all.each do |user|
     print "."
     comment.comments.create(top_level_post: comment.top_level_post, author: user, body: movies.sample.send(:quote))
   end
+
+  user.followings_as_followee.first.accepted!
 end

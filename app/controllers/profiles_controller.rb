@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [ :show, :edit, :update ]
+  skip_before_action :ensure_profile_exists, only: [ :new, :create ]
 
   def show
     @followings = @profile.user.followings_as_followee.includes(follower: :profile).order(:id)

@@ -1,6 +1,6 @@
 <nav class="grow flex flex-col justify-between p-4">
   <ul class="flex flex-col gap">
-    <% if user_signed_in? %>
+    <% if user_signed_in? && current_user&.profile.persisted? %>
       <li>
         <%= link_to("Home", root_path) %>
       </li>
@@ -18,7 +18,8 @@
           <%= link_to("Developer Console", static_dev_console_path) %>
         </li>
       <% end %>
-    <% else %>
+    <% end %>
+    <% if !user_signed_in? %>
       <li>
         <%= link_to("Sign up", new_user_registration_path) %>
       </li>
