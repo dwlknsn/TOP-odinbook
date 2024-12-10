@@ -17,11 +17,9 @@
           </em>
         </div>
       </div>
-      <hr>
-      <div class="p-8">
+      <div class="p-8 mb-4 border-b">
         <%= comment.body %>
       </div>
-      <hr>
       <div id="actions" class="flex gap justify-end">
         <% if current_user == comment.author %>
           <div id="author-actions"class="flex gap underline items-center">

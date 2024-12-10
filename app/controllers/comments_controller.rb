@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.expect(comment: [ :commentable_id, :commentable_type, :body ])
+    params.expect(comment: [ :commentable_id, :commentable_type, :body, :top_level_post_id ])
   end
 
   def error_message(comment)
