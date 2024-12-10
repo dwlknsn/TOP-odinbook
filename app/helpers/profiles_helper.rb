@@ -25,7 +25,7 @@ module ProfilesHelper
     default = if Rails.env.development?
       "robohash"
     else
-      asset_url("default_avatar.png")
+      asset_url("avatars/default_avatar.png")
     end
 
     size = options[:size]
