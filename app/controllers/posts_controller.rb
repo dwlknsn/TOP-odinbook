@@ -2,12 +2,19 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ edit update destroy ]
 
   def index
+    scope = case params[:filter]
+    when "discover"
+        Post.discoverable_by(current_user)
+    when "following"
+        Post.followed_by(current_user)
+    else
+        Post.followed_by(current_user)
+    end
+
     set_page_and_extract_portion_from(
-      Post.published.includes([ :likes, author: :profile ])
-          .followed_by(current_user)
-          .order(created_at: :desc),
-        per_page: 5
-      )
+      scope.published.includes([ :likes, author: :profile ]).order(created_at: :desc),
+      per_page: 5
+    )
 
     if @page.first?
       render formats: :html

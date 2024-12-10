@@ -15,8 +15,14 @@ class Post < ApplicationRecord
   validates :content, presence: true
   validates :status, presence: true
 
-  scope :followed_by, ->(user) { where(author_id: user.followee_ids << user.id) }
-  scope :discoverable_by, ->(user) { where.not(author_id: user.followee_ids).where.not(author_id: user.id) }
+  scope :followed_by, ->(user) {
+    where(author_id: user.followings_as_follower.where(status: :accepted).select(:followee_id))
+  }
+
+  scope :discoverable_by, ->(user) {
+    where.not(author_id: user.followings_as_follower.where(status: [ :accepted, :blocked ]).select(:followee_id))
+    .where.not(author_id: user.id)
+  }
 
   before_commit :set_published_at_when_publishing
 

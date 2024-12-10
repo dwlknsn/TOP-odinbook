@@ -35,7 +35,7 @@ Posts
 - [x] User can archive a post
 - [x] User can view posts in a feed in preview format
 - [x] User can view a full post with its comments
-- [ ] Separate feeds for followed posts and discoverable posts
+- [x] Separate feeds for followed posts and discoverable posts
 - [ ] Separate public and private posts
 - [ ] ~pagination on posts#index~ removed in favour of infinite scroll
 - [x] infinite scroll on posts
