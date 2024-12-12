@@ -53,6 +53,8 @@ gem "geared_pagination", "~> 1.2"
 gem "omniauth-github", "~> 2.0"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 
+gem "faker", "~> 3.5"
+
 ###################################
 ###### DEV & TEST GEMS START ######
 ###################################
@@ -66,8 +68,6 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-
-  gem "faker", "~> 3.5"
 end
 
 group :development do
