@@ -55,6 +55,10 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 
 gem "faker", "~> 3.5"
 
+# https://guides.rubyonrails.org/v6.1/active_storage_overview.html#s3-service-amazon-s3-and-s3-compatible-apis
+gem "aws-sdk-s3", require: false
+
+
 ###################################
 ###### DEV & TEST GEMS START ######
 ###################################
