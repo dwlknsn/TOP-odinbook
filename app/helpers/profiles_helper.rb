@@ -20,14 +20,7 @@ module ProfilesHelper
     end
 
     # Set default URL and size parameters
-
-    # default image MUST be publicly accessible, so cannot be accessed from local machine
-    default = if Rails.env.development?
-      "robohash"
-    else
-      asset_url("avatars/default_avatar.png")
-    end
-
+    default = [ "identicon", "monsterid", "wavatar", "retro", "robohash" ].sample
     size = options[:size]
 
     # Compile the full URL with URI encoding for the parameters

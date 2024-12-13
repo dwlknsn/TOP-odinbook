@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
 
   def show
     @followings = @profile.user.followings_as_followee.includes(follower: :profile).order(:id)
+    @posts = @profile.user.authored_posts.order(id: :desc)
   end
 
   def new

@@ -9,8 +9,8 @@
   </div>
   <% if current_user == profile.user %>
     <%= render partial: "followings/followings", locals: { followings: followings } %>
-    <%= render partial: "posts/tabbed_posts", locals: { posts: profile.user.authored_posts, title: "My Posts", variant: :preview }  %>
+    <%= render partial: "posts/tabbed_posts", locals: { posts: posts, title: "My Posts", variant: :preview }  %>
   <% else %>
-    <%= render partial: "posts/posts", locals: { posts: profile.user.authored_posts.published, title: "Posts", variant: :preview }  %>
+    <%= render partial: "posts/posts", locals: { posts: posts.published, title: "Posts", variant: :preview }  %>
   <% end %>
 </div>
