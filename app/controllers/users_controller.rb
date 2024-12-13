@@ -11,6 +11,8 @@ class UsersController < ApplicationController
 
     @user = scope.find(params[:id])
 
+    @posts = @user.authored_posts.published.order(id: :desc)
+
   rescue
     redirect_to users_path, alert: "User not found"
   end
