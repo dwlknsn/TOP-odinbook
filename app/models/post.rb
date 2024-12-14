@@ -25,10 +25,15 @@ class Post < ApplicationRecord
   }
 
   before_commit :set_published_at_when_publishing
+  after_commit :auto_like
 
   private
 
   def set_published_at_when_publishing
     self.published_at = Time.current if status_changed? && status == "published"
+  end
+
+  def auto_like
+    AutomatedLikeJob.perform_later(self) if status_previously_changed? && status == "published"
   end
 end
