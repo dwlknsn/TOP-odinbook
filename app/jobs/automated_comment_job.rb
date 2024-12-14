@@ -5,9 +5,9 @@ class AutomatedCommentJob < ApplicationJob
     top_level_post = commentable.top_level_post
     return if top_level_post.all_comments_count >= 6
 
-    users = User.where.not(id: commentable.author_id).first(2)
+    users = User.where.not(id: commentable.author_id).first(4).sample(2)
 
-    users.each do |user|
+    users.shuffle.each do |user|
       sleep(7)
 
       Comment::Example.create_for(
