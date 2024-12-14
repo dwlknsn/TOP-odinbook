@@ -38,4 +38,26 @@ class Comment < ApplicationRecord
   def auto_comment
     AutomatedCommentJob.perform_later(self)
   end
+
+  class Example
+    MOVIES = [
+      Faker::Movies::PrincessBride,
+      Faker::Movies::Lebowski,
+      Faker::Movies::BackToTheFuture,
+      Faker::Movies::Ghostbusters,
+      Faker::Movies::Hobbit,
+      Faker::Movies::HarryPotter,
+      Faker::Movies::LordOfTheRings,
+      Faker::Movies::StarWars,
+      Faker::Movies::Departed
+    ]
+
+    def self.create_for(commentable:, top_level_post:, author:)
+      commentable.comments.create(
+        top_level_post: top_level_post,
+        author: author,
+        body: MOVIES.sample.send(:quote)
+      )
+    end
+  end
 end

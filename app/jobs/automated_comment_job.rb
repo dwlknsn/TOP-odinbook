@@ -1,30 +1,19 @@
 class AutomatedCommentJob < ApplicationJob
   queue_as :default
 
-  MOVIES = [
-    Faker::Movies::PrincessBride,
-    Faker::Movies::Lebowski,
-    Faker::Movies::BackToTheFuture,
-    Faker::Movies::Ghostbusters,
-    Faker::Movies::Hobbit,
-    Faker::Movies::HarryPotter,
-    Faker::Movies::LordOfTheRings,
-    Faker::Movies::StarWars,
-    Faker::Movies::Departed
-  ]
-
   def perform(commentable)
-    post = commentable.top_level_post
-    return if post.all_comments_count >= 6
+    top_level_post = commentable.top_level_post
+    return if top_level_post.all_comments_count >= 9
 
-    users = User.first(5).sample(2)
+    users = User.where.not(id: commentable.author_id).first(4)
 
     users.each do |user|
       sleep(7)
-      commentable.comments.create!(
-        author: user,
-        top_level_post: post,
-        body: MOVIES.sample.send(:quote)
+
+      Comment::Example.create_for(
+        commentable: commentable,
+        top_level_post: top_level_post,
+        author: user
       )
     end
   end

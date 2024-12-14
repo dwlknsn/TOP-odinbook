@@ -42,36 +42,22 @@ end
 
 puts
 puts "Creating comments, likes, and follows"
-movies = [
-  Faker::Movies::PrincessBride,
-  Faker::Movies::Lebowski,
-  Faker::Movies::BackToTheFuture,
-  Faker::Movies::Ghostbusters,
-  Faker::Movies::Hobbit,
-  Faker::Movies::HarryPotter,
-  Faker::Movies::LordOfTheRings,
-  Faker::Movies::StarWars,
-  Faker::Movies::Departed
-]
-
 User.all.each do |user|
   posts = Post.published.where.not(author: user).sample(20)
 
   posts.each do |post|
     print "."
-    post.comments.create(top_level_post: post, author: user, body: movies.sample.send(:quote))
+
+    Comment::Example.create_for(
+      commentable: post,
+      top_level_post: post,
+      author: user
+    )
     post.likes.create(user: user)
   end
 
-  User.where.not(id: user.id).sample(3).each do |followee|
-    followee.followers << user
-  end
-end
-
-User.all.each do |user|
-  Comment.where.not(author: user).sample(20).each do |comment|
-    print "."
-    comment.comments.create(top_level_post: comment.top_level_post, author: user, body: movies.sample.send(:quote))
+  User.where.not(id: user.id).sample(3).each do |follower|
+    user.followers << follower
   end
 
   user.followings_as_followee.first.accepted!
