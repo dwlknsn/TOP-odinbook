@@ -8,6 +8,7 @@ class Comment < ApplicationRecord
   validates :body, presence: true
 
   after_create_commit :update_commentable_owner_notifications
+  after_create_commit :auto_comment
 
   def soft_delete!
     update!(
@@ -32,5 +33,9 @@ class Comment < ApplicationRecord
       partial: "notifications/comment",
       locals: { comment: self, post: post }
     )
+  end
+
+  def auto_comment
+    AutomatedCommentJob.perform_later(self)
   end
 end

@@ -13,14 +13,15 @@ class AutomatedCommentJob < ApplicationJob
     Faker::Movies::Departed
   ]
 
-  def perform(post)
-    abort if Comment.where(top_level_post: post).count >= 6
+  def perform(commentable)
+    post = commentable.top_level_post
+    return if post.all_comments_count >= 6
 
     users = User.first(5).sample(2)
 
     users.each do |user|
       sleep(5)
-      post.comments.create!(
+      commentable.comments.create!(
         author: user,
         top_level_post: post,
         body: MOVIES.sample.send(:quote)

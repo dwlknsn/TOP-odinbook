@@ -28,17 +28,27 @@ class Post < ApplicationRecord
   after_commit :auto_like
   after_commit :auto_comment
 
+  def top_level_post
+    self
+  end
+
   private
 
   def set_published_at_when_publishing
-    self.published_at = Time.current if status_changed? && status == "published"
+    reuturn unless status_previously_changed? && status == "published"
+
+    self.published_at = Time.current
   end
 
   def auto_like
-    AutomatedLikeJob.perform_later(self) if status_previously_changed? && status == "published"
+    reuturn unless status_previously_changed? && status == "published"
+
+    AutomatedLikeJob.perform_later(self)
   end
 
   def auto_comment
-    AutomatedCommentJob.perform_later(self) if status == "published"
+    reuturn unless status == "published"
+
+    AutomatedCommentJob.perform_later(self)
   end
 end
