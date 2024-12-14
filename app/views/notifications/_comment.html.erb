@@ -1,0 +1,3 @@
+<div id="<%= dom_id(comment) %>-notification" style="animation: var(--animate-slide-in-left) forwards;">
+  <%= link_to("#{comment.author.display_name} Replied to your #{comment.commentable_type}", post_path(local_assigns[:post])) %>
+</div>

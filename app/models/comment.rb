@@ -7,6 +7,8 @@ class Comment < ApplicationRecord
 
   validates :body, presence: true
 
+  after_create_commit :update_commentable_owner_notifications
+
   def soft_delete!
     update!(
       deleted_at: Time.now,
@@ -16,5 +18,19 @@ class Comment < ApplicationRecord
 
   def soft_deleted?
     deleted_at.present?
+  end
+
+  private
+
+  def update_commentable_owner_notifications
+    post = top_level_post
+    target_dom_element = "#{ commentable.author.dom_id }-notifications-feed"
+
+    broadcast_append_to(
+      [ commentable.author, :notifications ],
+      target: target_dom_element,
+      partial: "notifications/comment",
+      locals: { comment: self, post: post }
+    )
   end
 end
