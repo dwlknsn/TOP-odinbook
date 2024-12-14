@@ -1,5 +1,12 @@
 <div class="flex flex-col gap" data-controller="commentable">
   <%= render @post %>
+  <div class="flex justify-end items-center gap">
+    <%= link_to(post_comments_path(@post), class: "btn btn--secondary border-dark", data: { turbo_frame: "comments-for-#{dom_id(@post)}" }) do %>
+      <%= image_tag("icons/refresh.svg", size: 32, aria: { hidden: true }, class: "colorize-black") %>
+      <%# #  style: "animation: var(--animate-spin)") %>
+      <em>Refresh Comments</em>
+    <% end %>
+  </div>
   <%= render partial: "comments/form", locals: { commentable: @post, comment: Comment.new } %>
-  <%= render partial: "comments/comments", locals: { commentable: @post } %>
+  <%= render partial: "comments/comments", locals: { comments: @post.comments.order(id: :desc), commentable: @post } %>
 </div>

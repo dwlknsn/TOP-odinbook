@@ -3,9 +3,9 @@ class AutomatedCommentJob < ApplicationJob
 
   def perform(commentable)
     top_level_post = commentable.top_level_post
-    return if top_level_post.all_comments_count >= 9
+    return if top_level_post.all_comments_count >= 6
 
-    users = User.where.not(id: commentable.author_id).first(4)
+    users = User.where.not(id: commentable.author_id).first(2)
 
     users.each do |user|
       sleep(7)

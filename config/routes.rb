@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   delete "omniauth_logins/:id", to: "omniauth_logins#destroy", as: "omniauth_logins"
 
-  resources :posts
+  resources :posts do
+    get :comments, to: "comments#index"
+  end
   resources :comments, only: [ :create, :update, :destroy ]
   resources :likes, only: [ :create, :destroy ]
 

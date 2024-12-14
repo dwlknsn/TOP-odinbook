@@ -1,4 +1,9 @@
 class CommentsController < ApplicationController
+  def index
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments.order(id: :desc)
+  end
+
   def create
     @comment = current_user.authored_comments.build(comment_params)
 
