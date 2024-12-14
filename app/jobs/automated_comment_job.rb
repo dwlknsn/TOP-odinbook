@@ -20,7 +20,7 @@ class AutomatedCommentJob < ApplicationJob
     users = User.first(5).sample(2)
 
     users.each do |user|
-      sleep(5)
+      sleep(7)
       commentable.comments.create!(
         author: user,
         top_level_post: post,

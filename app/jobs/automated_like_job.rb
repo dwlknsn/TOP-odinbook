@@ -2,7 +2,7 @@ class AutomatedLikeJob < ApplicationJob
   queue_as :default
 
   def perform(likeable)
-    users = User.first(4)
+    users = User.where.not(id: likeable.user_id).first(4)
     likeable.likes.where(user: users).destroy_all
 
     users.each do |user|
