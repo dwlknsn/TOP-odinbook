@@ -26,6 +26,7 @@ class Post < ApplicationRecord
 
   before_commit :set_published_at_when_publishing
   after_commit :auto_like
+  after_commit :auto_comment
 
   private
 
@@ -35,5 +36,9 @@ class Post < ApplicationRecord
 
   def auto_like
     AutomatedLikeJob.perform_later(self) if status_previously_changed? && status == "published"
+  end
+
+  def auto_comment
+    AutomatedCommentJob.perform_later(self) if status == "published"
   end
 end
