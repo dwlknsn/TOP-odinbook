@@ -35,19 +35,19 @@ class Post < ApplicationRecord
   private
 
   def set_published_at_when_publishing
-    reuturn unless status_previously_changed? && status == "published"
+    return unless status_previously_changed? && status == "published"
 
     self.published_at = Time.current
   end
 
   def auto_like
-    reuturn unless status_previously_changed? && status == "published"
+    return unless status_previously_changed? && status == "published"
 
     AutomatedLikeJob.perform_later(self)
   end
 
   def auto_comment
-    reuturn unless status == "published"
+    return unless status == "published"
 
     AutomatedCommentJob.perform_later(self)
   end
