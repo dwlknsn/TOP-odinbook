@@ -69,14 +69,14 @@ Following Users
 Notifications
 
 - [x] Notifications about likes on your posts and comments
-- [ ] Notifications about comments on your posts and comments
+- [x] Notifications about comments on your posts and comments
 
 Usability/UX/Misc Extra Features
 
 - [x] Dark Mode - based on both browser preference and with a toggle in the UI
 - [x] Integrate AWS S3 for image uploads
 - [x] Cron/job for simulating likes on posts, so that the notifications stream is populated
-- [ ] Cron/job for simulating comments on posts, so that the notifications stream is populated
+- [x] Cron/job for simulating comments on posts, so that the notifications stream is populated
 - [ ] skeleton placeholder dom elements for loading items
 - [ ] Better color palette
 - [ ] Private Message chat?
