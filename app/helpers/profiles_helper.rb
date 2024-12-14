@@ -16,11 +16,11 @@ module ProfilesHelper
     gravatar_id = if user&.email.present?
       Digest::SHA256.hexdigest(user.email.downcase)
     else
-      "default"
+      # nothing - fall back to the default image.
     end
 
     # Set default URL and size parameters
-    default = [ "identicon", "monsterid", "wavatar", "retro", "robohash" ].sample
+    default = "robohash"
     size = options[:size]
 
     # Compile the full URL with URI encoding for the parameters
