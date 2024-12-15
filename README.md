@@ -77,6 +77,9 @@ Usability/UX/Misc Extra Features
 - [x] Integrate AWS S3 for image uploads
 - [x] Cron/job for simulating likes on posts, so that the notifications stream is populated
 - [x] Cron/job for simulating comments on posts, so that the notifications stream is populated
+- [x] button to refresh comments section
+- [x] navbar icons
+- [x] header logo
 - [ ] skeleton placeholder dom elements for loading items
 - [ ] Better color palette
 - [ ] Private Message chat?
@@ -84,3 +87,4 @@ Usability/UX/Misc Extra Features
 - [ ] User can schedule a post to be published at a future date
 - [ ] User can mute another user (i.e. remove their posts from all feeds)
 - [ ] User can unmute another user
+- [ ] button to clear old notifications

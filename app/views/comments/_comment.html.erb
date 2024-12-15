@@ -1,4 +1,4 @@
-<div id="<%= dom_id(comment) %>"class="flex flex-col gap-half" style="animation: var(--animate-slide-in-left) forwards;" data-controller="commentable">
+<div id="<%= dom_id(comment) %>"class="flex flex-col gap-half" data-controller="commentable">
   <div class="card border mis-8">
     <% if comment.soft_deleted? %>
       <em class="text-subtle">
