@@ -42,7 +42,7 @@
   align-items: center;
   background-color: var(--color-bg);
   border-block-end-width: var(--border);
-  block-size: var(--size-16);
+  block-size: var(--size-24);
   display: flex;
   gap: var(--size-4);
   grid-area: header;

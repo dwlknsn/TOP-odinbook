@@ -9,14 +9,14 @@
   @media (width >= 48rem) {
     --sidebar-border-width: var(--border);
     --sidebar-padding: var(--size-2);
-    --sidebar-left-width: 220px;
+    --sidebar-left-width: 280px;
   }
 
   @media (width >= 84rem) {
     --sidebar-border-width: var(--border);
     --sidebar-padding: var(--size-4);
-    --sidebar-left-width: 280px;
-    --sidebar-right-width: 280px;
+    --sidebar-left-width: 360px;
+    --sidebar-right-width: 360px;
   }
 }
 
