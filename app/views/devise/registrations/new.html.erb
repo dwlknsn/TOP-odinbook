@@ -6,16 +6,14 @@
         <%= f.label :email, hidden: true %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input", size: "20", placeholder: "email" %>
       </div>
-      <div class="field flex flex-col items-end">
+      <div class="field">
         <%= f.label :password, hidden: true %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "input", size: "20", placeholder: "password" %>
-        <% if @minimum_password_length %>
-          <em class="text-xs text-subtle">(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "input", size: "20", placeholder: "password", minlength: @minimum_password_length %>
+        <em class="text-xs text-subtle">(<%= @minimum_password_length %> characters minimum)</em>
       </div>
-      <div class="field flex flex-col items-end">
+      <div class="field">
         <%= f.label :password_confirmation, hidden: true %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input", size: "20", placeholder: "password confirmation" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input", size: "20", placeholder: "password confirmation", minlength: @minimum_password_length %>
       </div>
       <div class="actions flex flex-col gap items-center">
         <%= f.submit "Sign up", class: "btn btn--primary", style: "min-width: clamp(150px, 40%, 400px)" %>
