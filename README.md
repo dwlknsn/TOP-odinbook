@@ -78,6 +78,7 @@ Usability/UX/Misc Extra Features
 - [x] Cron/job for simulating likes on posts, so that the notifications stream is populated
 - [x] Cron/job for simulating comments on posts, so that the notifications stream is populated
 - [x] button to refresh comments section
+- [x] animate comment refresh button icon and comments section to make it clear that the comments are being refreshed
 - [x] navbar icons
 - [x] header logo
 - [ ] skeleton placeholder dom elements for loading items
@@ -88,3 +89,4 @@ Usability/UX/Misc Extra Features
 - [ ] User can mute another user (i.e. remove their posts from all feeds)
 - [ ] User can unmute another user
 - [ ] button to clear old notifications
+- [ ] add favicon
