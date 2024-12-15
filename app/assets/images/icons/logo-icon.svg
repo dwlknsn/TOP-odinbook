@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="#111" viewBox="2 17 44 45" stroke-width="1.5" stroke="currentColor">
+  <path d="M24 18 c11.58 0 21 9.4206 21 21 s-9.42 21 -21 21 s-21 -9.4206 -21 -21 s9.42 -21 21 -21 z M8.9028 51.8892 l0 -25.779 c-2.9686 3.4726 -4.7676 7.9734 -4.7676 12.889 s1.7984 9.4164 4.7676 12.889 z M24 58.8649 c10.953 0 19.865 -8.9118 19.865 -19.865 s-8.9118 -19.865 -19.865 -19.865 c-5.4385 0 -10.371 2.198 -13.962 5.7505 l0 28.229 c3.591 3.5525 8.5242 5.7505 13.962 5.7505 z"></path>
+</svg>
+
+<!--
+background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
+
+.looka-fizzqt::after
+content: "";
+width: 200%;
+height: 200%;
+bottom: 0px;
+left: 0px;
+position: absolute;
+opacity: 0.25;
+background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
+
+-->
