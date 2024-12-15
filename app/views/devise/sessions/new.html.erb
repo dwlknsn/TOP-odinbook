@@ -1,25 +1,30 @@
-<div class="flex flex-col gap">
-  <h2 class="text-3xl">Log in</h2>
-  <div style="width: 50%">
+<div class="flex flex-col gap items-center">
+  <div style="min-width: clamp(300px, 45%, 400px)">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "flex flex-col gap"}) do |f| %>
-      <div class="field flex flex-col gap-half items-start">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input", size: "20" %>
+      <div class="field">
+        <%= f.label :email, hidden: true %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input", size: "20", placeholder: "email" %>
       </div>
-      <div class="field flex flex-col gap-half items-start">
-        <%= f.label :password %>
-        <%= f.password_field :password, autocomplete: "current-password", class: "input", size: "20" %>
+      <div class="field flex flex-col items-end">
+        <%= f.label :password, hidden: true %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "input", size: "20", placeholder: "password" %>
+        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+          <em><%= link_to("Forgot your password?", new_password_path(resource_name), class: "text-xs text-subtle text-end") %></em>
+        <% end %>
       </div>
-      <% if devise_mapping.rememberable? %>
-        <div class="field flex flex-col gap-half items-start">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me, class: "" %>
-        </div>
-      <% end %>
-      <div class="actions">
-        <%= f.submit "Log in", class: "btn btn--primary" %>
+      <div class="actions flex flex-col gap items-center">
+        <%= f.submit "Log in", class: "btn btn--primary", style: "min-width: clamp(150, 50%, 400px)" %>
       </div>
     <% end %>
   </div>
-  <%= render "devise/shared/links" %>
+</div>
+<div class="flex items-center gap m-10">
+  <hr class="grow border" aria-hidden="true">
+  <div class="text-subtle">or</div>
+  <hr class="grow border" aria-hidden="true">
+</div>
+<div class="flex justify-center">
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "btn btn--secondary border border-dark" %>
+  <% end %>
 </div>
