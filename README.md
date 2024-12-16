@@ -81,6 +81,8 @@ Usability/UX/Misc Extra Features
 - [x] animate comment refresh button icon and comments section to make it clear that the comments are being refreshed
 - [x] navbar icons
 - [x] header logo
+- [x] add favicon
+- [x] highlight active nav item
 - [ ] skeleton placeholder dom elements for loading items
 - [ ] Better color palette
 - [ ] Private Message chat?
@@ -89,4 +91,3 @@ Usability/UX/Misc Extra Features
 - [ ] User can mute another user (i.e. remove their posts from all feeds)
 - [ ] User can unmute another user
 - [ ] button to clear old notifications
-- [ ] add favicon
