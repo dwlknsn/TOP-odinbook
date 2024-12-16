@@ -1,0 +1,24 @@
+body.dark > #sidebar-left {
+  background: radial-gradient(circle at 0% 100%, rgb(0, 40, 0) 0%, rgba(0, 0, 0, 0) 100%);
+}
+body.dark > #sidebar-right {
+  background: radial-gradient(circle at 100% 100%, rgb(0, 40, 0) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.nav-item {
+  padding-left: 0%;
+  transition: padding-left 0.3s ease-in-out,
+              opacity 0.3s ease-in-out;
+  text-decoration: none;
+}
+nav > ul:hover > .nav-item {
+  opacity: 0.5;
+}
+nav > ul:hover > .nav-item:hover {
+  opacity: 1;
+  padding-left: 5px;
+}
+.nav-item.active {
+  opacity: 1;
+  color: red;
+}

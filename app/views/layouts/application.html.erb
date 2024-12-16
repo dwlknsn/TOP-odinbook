@@ -16,34 +16,14 @@
     <%= javascript_importmap_tags %>
   </head>
   <body class="dark double-sidebar-layout">
-    <header id="header" class="">
-      <div class="container flex items-center justify-between" style="--container-width: 100%;">
-        <div class="flex gap items-center justify-start">
-          <%= image_tag("icons/logo-icon.svg", size: 48, aria: { hidden: true }, class: "colorize-black mis-4 mie-10") %>
-          <%= image_tag("icons/logo-text.svg", size: "128x54", aria: { hidden: true }, class: "colorize-black border-be border-dark pb-3") %>
-        </div>
-        <div data-controller="dark-mode" class="flex gap justify-end avatar">
-          <%= image_tag("icons/moon.svg", size: 32, class: "btn btn--icon hide@sm", aria: { hidden: true }, data: { dark_mode_target: "darkIcon", action: 'click->dark-mode#toggleTheme'}) %>
-          <%= image_tag("icons/sun.svg", size: 32, class: "btn btn--icon hide@sm", aria: { hidden: true }, data: { dark_mode_target: "lightIcon", action: 'click->dark-mode#toggleTheme'}) %>
-        </div>
-      </div>
-    </header>
-    <div id="sidebar-left">
-      <div class="grow container flex flex-col">
-        <%#= yield(:sidebar) %>
-        <%= render "shared/sidebar" %>
-      </div>
-    </div>
+    <%= render "application/header" %>
+    <%= render "application/sidebar_left" %>
     <main id="main">
       <div class="container flex flex-col gap">
         <%= render 'shared/flash_messages' %>
         <%= yield %>
       </div>
     </main>
-    <div id="sidebar-right" class="container">
-      <% if user_signed_in? %>
-        <%= render partial: "notifications/notifications", locals: { user: current_user }, class: "sticky" %>
-      <% end %>
-    </div>
+    <%= render "application/sidebar_right" %>
   </body>
 </html>
