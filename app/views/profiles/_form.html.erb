@@ -27,11 +27,11 @@
     <div id="personal-info" class="flex flex-col gap grow pi-4">
       <div class="flex flex-col gap-half">
         <%= f.label :display_name %>
-        <%= f.text_field :display_name, class: "input" %>
+        <%= f.text_field :display_name, class: "input", minlength: 3, maxlength: 32, pattern: "[a-zA-Z0-9-_]{3,32}", required: true %>
       </div>
       <div class="flex flex-col gap-half">
         <%= f.label :username %>
-        <%= f.text_field :username, disabled: profile.username.present?, class: "input" %>
+        <%= f.text_field :username, class: "input", disabled: profile.created_at.present?, minlength: 3, maxlength: 15, pattern: "[a-zA-Z0-9-_]{3,15}", required: true %>
       </div>
       <div class="flex flex-col gap-half">
         <%= f.label :email %>

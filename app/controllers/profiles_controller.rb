@@ -52,5 +52,7 @@ class ProfilesController < ApplicationController
       @profile.avatar.purge if params[:remove_avatar] == "true"
       @profile.update!(profile_params)
     end
+  rescue
+    false
   end
 end
