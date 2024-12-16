@@ -3,24 +3,24 @@
     <nav class="grow flex flex-col justify-between p-4">
       <ul class="flex flex-col gap">
         <% if user_signed_in? && current_user&.profile.persisted? %>
-          <li class="nav-item flex gap justify-start items-center">
+          <li class="nav-item flex gap justify-start items-center <%= "active" if current_page?(posts_path({ filter: :following })) %>">
             <%= image_tag("icons/home.svg", size: 20, aria: { hidden: true }, class: "colorize-black") %>
             <%= link_to("My Feed", posts_path({ filter: :following }), class: "text-lg") %>
           </li>
-          <li class="nav-item flex gap justify-start items-center">
+          <li class="nav-item flex gap justify-start items-center <%= "active" if current_page?(posts_path({ filter: :discover })) %>">
             <%= image_tag("icons/sparkles.svg", size: 20, aria: { hidden: true }, class: "colorize-black") %>
             <%= link_to("Discover", posts_path({ filter: :discover }), class: "text-lg") %>
           </li>
-          <li class="nav-item flex gap justify-start items-center">
+          <li class="nav-item flex gap justify-start items-center <%= "active" if current_page?(users_path) %>">
             <%= image_tag("icons/users.svg", size: 20, aria: { hidden: true }, class: "colorize-black") %>
             <%= link_to("Users", users_path, class: "text-lg") %>
           </li>
-          <li class="nav-item flex gap justify-start items-center">
+          <li class="nav-item flex gap justify-start items-center <%= "active" if current_page?(profile_path) %>">
             <%= image_tag("icons/user-circle.svg", size: 20, aria: { hidden: true }, class: "colorize-black") %>
             <%= link_to("Profile", profile_path, class: "text-lg") %>
           </li>
           <% if Rails.env.development? %>
-            <li class="nav-item flex gap justify-start items-center">
+            <li class="nav-item flex gap justify-start items-center <%= "active" if current_page?(static_dev_console_path) %>">
               <%= image_tag("icons/command-line.svg", size: 20, aria: { hidden: true }, class: "colorize-black") %>
               <%= link_to("Developer Console", static_dev_console_path, class: "text-lg") %>
             </li>
